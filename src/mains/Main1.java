@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import modelo.Coordenada;
 
 /**
-@author drizo
+@author José Soler Martínez
  **/
 public class Main1 {
 
