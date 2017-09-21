@@ -14,10 +14,12 @@ public class Coordenada {
 	public Coordenada(int x, int y) {
 		this.x=x;
 		this.y=y;
+		NUMERO_COORDENADAS++;
 	}
 	public Coordenada (Coordenada otra) {
 		this.x=otra.x;
 		this.y=otra.y;
+		NUMERO_COORDENADAS++;
 	}
 	public static int getNumeroCoordenadas() {
 		
@@ -57,7 +59,7 @@ public class Coordenada {
 	public int getY() {
 		
 	}
-	public Coordenada suma(Coordenada otra) {
+	public Coordenada suma (Coordenada otra) {
 		
 	}
 	
