@@ -10,7 +10,7 @@ package modelo;
 public class Coordenada {
 	private int x;
 	private int y;
-	private int NUMERO_COORDENADAS;
+	private static int NUMERO_COORDENADAS;
 	public Coordenada(int x, int y) {
 		this.x=x;
 		this.y=y;
@@ -22,12 +22,12 @@ public class Coordenada {
 		NUMERO_COORDENADAS++;
 	}
 	public static int getNumeroCoordenadas() {
-		
+		return NUMERO_COORDENADAS;
 	}
 
 	@Override
 	public String toString() {
-		return "Coordenada [x=" + x + ", y=" + y + "]";
+		return "Coordenada (x=" + x + ", y=" + y + ")";
 	}
 	
 	@Override
@@ -54,13 +54,13 @@ public class Coordenada {
 		return true;
 	}
 	public int getX() {
-		
+		return x;
 	}
 	public int getY() {
-		
+		return y;
 	}
 	public Coordenada suma (Coordenada otra) {
-		
+		return new Coordenada (x+otra.x,y+otra.y);
 	}
 	
 }
