@@ -1,6 +1,6 @@
-<Introduce aquí tu DNI o NIE sin la letra final, si es un NIE con la letra inicial en mayúsculas>
+48796440
 
 # Prácticas de Programación 3: Juego de la vida de Conway
-**Alumno/a:** <Introduce aquí tu nombre y apellidos>
+**Alumno/a:** José Soler Martínez
 
-**Grupo de prácticas:** <Introduce aquí tu grupo de prácticas>
+**Grupo de prácticas:** Grupo 1; jueves 11:00-13:00 
