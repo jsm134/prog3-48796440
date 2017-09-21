@@ -39,11 +39,9 @@ public class Coordenada {
 		return NUMERO_COORDENADAS;
 	}
 
-	/**
-	 * Creación de un string para imprimir los parámetros (x,y) de una coordenada por consola.
-	 */
+	@Override
 	public String toString() {
-		return "Coordenada (x=" + x + ", y=" + y + ")";
+		return "(" + this.x + "," + this.y + ")";
 	}
 	/**
 	 * Dicho método sirve para comprobar si dos coordenadas son iguales o no
