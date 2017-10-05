@@ -2,6 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 public class Tablero {
 	private HashMap<Coordenada,EstadoCelda> celdas;
