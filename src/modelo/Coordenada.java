@@ -43,9 +43,15 @@ public class Coordenada {
 	public String toString() {
 		return "(" + this.x + "," + this.y + ")";
 	}
-	/**
-	 * Dicho método sirve para comprobar si dos coordenadas son iguales o no
-	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + x;
+		result = prime * result + y;
+		return result;
+	}
+	@Override
 	public boolean equals(Object otro) {
 		if (this == otro)
 			return true;
@@ -85,3 +91,5 @@ public class Coordenada {
 	}
 	
 }
+
+
