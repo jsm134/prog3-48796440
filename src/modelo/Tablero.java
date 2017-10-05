@@ -1,4 +1,8 @@
 package modelo;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class Tablero {
 	private HashMap<Coordenada,EstadoCelda> celdas;
 	public Tablero(Coordenada dimensiones){
