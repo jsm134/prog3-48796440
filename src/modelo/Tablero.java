@@ -16,16 +16,16 @@ public class Tablero {
 	public void setCelda(Coordenada posicion, EstadoCelda e) {
 		
 	}
-	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada coordenada){
+	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion){
 		
 	}
 	public void muestraErrorPosicionInvalida(Coordenada c) {
 		
 	}
-	public boolean cargaPatron(Patron patr, Coordenada coordenada) {
+	public boolean cargaPatron(Patron patron, Coordenada coordenadaInicial) {
 		
 	}
-	public boolean contiene(Coordenada coordenada) {
+	public boolean contiene(Coordenada posicion) {
 		
 	}
 	@Override
