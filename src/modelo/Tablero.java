@@ -1,7 +1,7 @@
 package modelo;
-
 public class Tablero {
-	public Tablero(Coordenada){
+	private HashMap<Coordenada,EstadoCelda> celdas;
+	public Tablero(Coordenada dimensiones){
 		
 	}
 	public Coordenada getDimensiones() {
@@ -10,22 +10,22 @@ public class Tablero {
 	public Collection<Coordenada> getPosiciones(){
 		
 	}
-	public EstadoCelda getCelda(Coordenada) {
+	public EstadoCelda getCelda(Coordenada posicion) {
 		
 	}
-	public void setCelda(Coordenada, EstadoCelda) {
+	public void setCelda(Coordenada posicion, EstadoCelda e) {
 		
 	}
-	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada){
+	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada coordenada){
 		
 	}
-	public void muestraErrorPosicionInvalida(Coordenada) {
+	public void muestraErrorPosicionInvalida(Coordenada c) {
 		
 	}
-	public boolean cargaPatron(Patron, Coordenada) {
+	public boolean cargaPatron(Patron patr, Coordenada coordenada) {
 		
 	}
-	public boolean contiene(Coordenada) {
+	public boolean contiene(Coordenada coordenada) {
 		
 	}
 	@Override
