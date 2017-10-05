@@ -1,5 +1,4 @@
 package modelo;
-
-public class EstadoCelda {
-
+enum EstadoCelda{
+	MUERTA, VIVA;
 }
