@@ -48,15 +48,34 @@ public class Tablero {
 		
 	}
 	public boolean cargaPatron(Patron patron, Coordenada coordenadaInicial) {
-		boolean cargado;
-		cargado=false;
+		boolean cargado; //se cambia
+		Coordenada destino; //se cambia
+		EstadoCelda valor;	//se cambia
 		Collection<Coordenada> cp;
+		
+		cargado=true;	//se cambia
+		
 		cp = patron.getPosiciones();
-		
-		
+		for(Coordenada actual:cp) {
+			destino=actual.suma(coodenadaInicial);
+			if(tablero.containsKey(destino))==false){
+				cargado=false;
+			}
+		}
+		//comprobar que se puede hacer el patrón en ese sitio
+		if(cargado==true) {
+			cp = patron.getPosiciones();
+			for(Coordenada actual:cp) {
+				destino=actual.suma(coordenadaInicial);
+				valor=patron.getCelda(actual);
+				tablero.put(destino,valor);
+			}
+		}
 		return cargado;
 		
 	}
+	
+	
 	public boolean contiene(Coordenada posicion) {
 		return false;
 		
