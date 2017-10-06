@@ -3,6 +3,8 @@
  */
 package modelo;
 
+import java.util.Collection;
+
 /**
  * @author José Soler Martínez
  *
@@ -12,7 +14,9 @@ public class Patron {
 	public Patron(String, Tablero) {}
 	public String getNombre() {}
 	public EstadoCelda getCelda(Coordenada) {}
-	public Collection<Coordenada> getPosiciones(){}
+	public Collection<Coordenada> getPosiciones(){
+		return null;
+	}
 	@Override
 	public String toString() {
 		return "Patron []";

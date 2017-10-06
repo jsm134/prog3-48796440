@@ -48,7 +48,13 @@ public class Tablero {
 		
 	}
 	public boolean cargaPatron(Patron patron, Coordenada coordenadaInicial) {
-		return false;
+		boolean cargado;
+		cargado=false;
+		Collection<Coordenada> cp;
+		cp = patron.getPosiciones();
+		
+		
+		return cargado;
 		
 	}
 	public boolean contiene(Coordenada posicion) {
