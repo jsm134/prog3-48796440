@@ -26,6 +26,12 @@ public class Juego {
 	public void actualiza() {
 		//hay que llamar a siguienteEstadoCelda para
 		//cada posición del tablero
+		Collection<Coordenada> cerdas; //cambiar
+		cerdas=tablero.getPosiciones();
+		for(Coordenada actual : cerdas) {
+			EstadoCelda nuevo=regla.calculaSiguienteEstadoCelda(tablero, actual);
+			tablero.setCelda(actual, nuevo);
+		}
 	}
 	public Tablero getTablero() {
 		return tablero;
