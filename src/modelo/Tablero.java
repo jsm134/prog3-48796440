@@ -29,7 +29,19 @@ public class Tablero {
 		
 	}
 	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion){
-		return null;
+		ArrayList<Coordenada> vecinas = null;
+		vecinas = new ArrayList<Coordenada>();
+		vecinas.add(new Coordenada(posicion.getX() - 1, posicion.getY()-1));
+		vecinas.add(new Coordenada(posicion.getX() - 1, posicion.getY()));
+		vecinas.add(new Coordenada(posicion.getX() - 1, posicion.getY()+1));
+		vecinas.add(new Coordenada(posicion.getX(), posicion.getY()+1));
+		vecinas.add(new Coordenada(posicion.getX() + 1, posicion.getY()+1));
+		vecinas.add(new Coordenada(posicion.getX() + 1, posicion.getY()));
+		vecinas.add(new Coordenada(posicion.getX() + 1, posicion.getY()-1));
+		vecinas.add(new Coordenada(posicion.getX(), posicion.getY()-1));
+		return vecinas;
+
+
 		
 	}
 	public void muestraErrorPosicionInvalida(Coordenada c) {

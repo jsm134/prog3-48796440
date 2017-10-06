@@ -8,7 +8,7 @@ package modelo;
  *
  */
 public class Patron {
-	private String nombre{}
+	private String nombre;
 	public Patron(String, Tablero) {}
 	public String getNombre() {}
 	public EstadoCelda getCelda(Coordenada) {}
