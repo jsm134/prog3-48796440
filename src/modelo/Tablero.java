@@ -3,86 +3,129 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 
 public class Tablero {
+	private Coordenada dimensiones;
 	private HashMap<Coordenada,EstadoCelda> celdas;
 	public Tablero(Coordenada dimensiones){
 		int x=dimensiones.getX();
 		int y=dimensiones.getY();
-		for (int i = 0; i < x+2; i++) {
-			for (int j = 0; j < y+2; j++) {
+		for (int i = 0; i < x; i++) {
+			for (int j = 0; j < y; j++) {
 				celdas.put(new Coordenada(i,j), EstadoCelda.MUERTA);
 			}
 		}
 	}
 	public Coordenada getDimensiones() {
-		return null;
+		return dimensiones;
 	}
 	public Collection<Coordenada> getPosiciones(){
-		return null;
-	}
-	public EstadoCelda getCelda(Coordenada posicion) {
-		return null;
-		
-	}
-	public void setCelda(Coordenada posicion, EstadoCelda e) {
-		
-	}
-	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion){
-		ArrayList<Coordenada> vecinas = null;
-		vecinas = new ArrayList<Coordenada>();
-		vecinas.add(new Coordenada(posicion.getX() - 1, posicion.getY()-1));
-		vecinas.add(new Coordenada(posicion.getX() - 1, posicion.getY()));
-		vecinas.add(new Coordenada(posicion.getX() - 1, posicion.getY()+1));
-		vecinas.add(new Coordenada(posicion.getX(), posicion.getY()+1));
-		vecinas.add(new Coordenada(posicion.getX() + 1, posicion.getY()+1));
-		vecinas.add(new Coordenada(posicion.getX() + 1, posicion.getY()));
-		vecinas.add(new Coordenada(posicion.getX() + 1, posicion.getY()-1));
-		vecinas.add(new Coordenada(posicion.getX(), posicion.getY()-1));
-		return vecinas;
-
-
-		
+		return celdas.keySet();
 	}
 	public void muestraErrorPosicionInvalida(Coordenada c) {
-		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Error: la celda(");
+		sb.append(c.getX());
+		sb.append(",");
+		sb.append(c.getY());
+		sb.append(") no existe");
+		System.out.println(sb);
+		// return sb.toString();
+		//System.out.println("Error: la celda(" +c.getX() + "," + c.getY() + ") no existe");
 	}
+	
+	public EstadoCelda getCelda(Coordenada posicion) {
+		Set<Coordenada> coordenadas = celdas.keySet();
+		if(coordenadas.contains(posicion)==false) {
+			muestraErrorPosicionInvalida(posicion);
+			return null;
+		}else {
+			return celdas.get(posicion);
+		}
+	}
+	public void setCelda(Coordenada posicion, EstadoCelda e) {
+		if(celdas.containsKey(posicion)) {
+			celdas.put(posicion, e);
+		}else {
+			muestraErrorPosicionInvalida(posicion);
+		}
+	}
+	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion){
+		ArrayList<Coordenada> vecinas = new ArrayList<Coordenada>();
+		int i=posicion.getX();
+		int j=posicion.getY();
+		//vecina0
+		Coordenada coordenada = new Coordenada (i - 1, j - 1);
+		if(celdas.get(coordenada)!=null) {
+			vecinas.add(new Coordenada(i - 1, j - 1));
+		}
+		//vecina1
+		coordenada = new Coordenada (i - 1, j);
+		if(celdas.get(coordenada)!=null) {
+			vecinas.add(new Coordenada(i - 1, j));
+		}
+		//vecina2
+		coordenada = new Coordenada (i, j + 1);
+		if(celdas.get(coordenada)!=null) {
+			vecinas.add(new Coordenada(i , j + 1));
+		}
+		//vecina3
+		coordenada = new Coordenada (i, j + 1);
+		if(celdas.get(coordenada)!=null) {
+			vecinas.add(new Coordenada(i , j + 1));
+		}
+		//vecina4
+		coordenada = new Coordenada (i + 1, j + 1);
+		if(celdas.get(coordenada)!=null) {
+			vecinas.add(new Coordenada(i + 1, j + 1));
+		}
+		//vecina5
+		coordenada = new Coordenada (i + 1, j);
+		if(celdas.get(coordenada)!=null) {
+			vecinas.add(new Coordenada(i + 1, j));
+		}
+		//vecina6
+		coordenada = new Coordenada (i + 1, j - 1);
+		if(celdas.get(coordenada)!=null) {
+			vecinas.add(new Coordenada(i + 1, j - 1));
+		}
+		//vecina7
+		coordenada = new Coordenada (i, j - 1);
+		if(celdas.get(coordenada)!=null) {
+			vecinas.add(new Coordenada(i, j - 1));
+		}
+		return vecinas;
+	}
+	
 	public boolean cargaPatron(Patron patron, Coordenada coordenadaInicial) {
-		boolean cargado; //se cambia
-		Coordenada destino; //se cambia
-		EstadoCelda valor;	//se cambia
+		boolean p_charge = true;
+		Coordenada c_final;
 		Collection<Coordenada> cp;
-		
-		cargado=true;	//se cambia
-		
 		cp = patron.getPosiciones();
-		for(Coordenada actual:cp) {
-			destino=actual.suma(coodenadaInicial);
-			if(tablero.containsKey(destino))==false){
-				cargado=false;
+		for(Coordenada select:cp) {
+			c_final=select.suma(coordenadaInicial);
+			if(celdas.containsKey(c_final) == false){
+				p_charge=false;
 			}
 		}
+		EstadoCelda c_status;
 		//comprobar que se puede hacer el patrón en ese sitio
-		if(cargado==true) {
+		if(p_charge==true) {
 			cp = patron.getPosiciones();
-			for(Coordenada actual:cp) {
-				destino=actual.suma(coordenadaInicial);
-				valor=patron.getCelda(actual);
-				tablero.put(destino,valor);
+			for(Coordenada select:cp) {
+				c_final=select.suma(coordenadaInicial);
+				c_status=patron.getCelda(select);
+				celdas.put(c_final,c_status);
 			}
 		}
-		return cargado;
+		return p_charge;
 		
 	}
 	
 	
 	public boolean contiene(Coordenada posicion) {
-		return false;
-		
-	}
-	@Override
-	public String toString() {
-		return "Tablero []";
+		return celdas.containsKey(posicion);
 	}
 
 }
