@@ -17,6 +17,34 @@ public class Tablero {
 			}
 		}
 	}
+	
+	public String toString() {
+		int cx=dimensiones.getX();
+		int cy=dimensiones.getY();
+		String tablero="";
+		tablero="+";
+		for(int i=1; i < cx;i++) {
+			tablero+="-";
+		}
+		tablero+="+\n";
+		for(int j=0; j < cy; j++) {
+			tablero+="|";
+			for(int i = 0; i < cx; i++) {
+				if(celdas.get(new Coordenada(i,j)) == EstadoCelda.MUERTA) {
+					tablero+= " ";
+				}else {
+					tablero+= "*";
+				}
+			}
+			tablero+= "+";
+		}
+		for(int i=1;i<=cx;i++) {
+			tablero+= "-";
+		}
+		tablero+= "+\n";
+		return tablero;
+	}
+	
 	public Coordenada getDimensiones() {
 		return dimensiones;
 	}
