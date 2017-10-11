@@ -11,14 +11,22 @@ import java.util.Collection;
  */
 public class Patron {
 	private String nombre;
-	public Patron(String, Tablero) {}
-	public String getNombre() {}
-	public EstadoCelda getCelda(Coordenada) {}
+	private Tablero tablero;
+	public Patron(String nombre, Tablero tablero) {
+		this.nombre = nombre;
+		this.tablero = tablero;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public EstadoCelda getCelda(Coordenada posicion) {
+		return tablero.getCelda(posicion);
+	}
 	public Collection<Coordenada> getPosiciones(){
-		return null;
+		return tablero.getPosiciones();
 	}
 	@Override
 	public String toString() {
-		return "Patron []";
+		return tablero.toString();
 	}
 }
