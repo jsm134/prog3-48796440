@@ -27,21 +27,9 @@ public class Coordenada {
 	 * Finalmente se suma 1 en NUMERO_COORDENADAS por una nueva coordenada creada
 	 */
 	public Coordenada (Coordenada otra) {
-		this.x=otra.x;
-		this.y=otra.y;
+		x=otra.x;
+		y=otra.y;
 		NUMERO_COORDENADAS++;
-	}
-	/**
-	 * Este es un getter del número de coordenadas existente.
-	 * @return <code>NUMERO_COORDENADAS
-	 */
-	public static int getNumeroCoordenadas() {
-		return NUMERO_COORDENADAS;
-	}
-
-	@Override
-	public String toString() {
-		return "(" + this.x + "," + this.y + ")";
 	}
 	@Override
 	public int hashCode() {
@@ -65,6 +53,17 @@ public class Coordenada {
 		if (y != other.y)
 			return false;
 		return true;
+	}
+	/**
+	 * Este es un getter del número de coordenadas existente.
+	 * @return <code>NUMERO_COORDENADAS
+	 */
+	public static int getNumeroCoordenadas() {
+		return NUMERO_COORDENADAS;
+	}
+	@Override
+	public String toString() {
+		return "(" + this.x + "," + this.y + ")";
 	}
 	/**
 	 * Getter de un parámetro de la coordenada

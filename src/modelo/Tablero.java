@@ -4,29 +4,36 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
-
+/**
+ * @author José Soler Martínez
+ *
+ */
 public class Tablero {
 	private Coordenada dimensiones;
 	private HashMap<Coordenada,EstadoCelda> celdas;
 	public Tablero(Coordenada dimensiones){
+		celdas=new HashMap<Coordenada, EstadoCelda>();
 		int x=dimensiones.getX();
 		int y=dimensiones.getY();
+		this.dimensiones=dimensiones;
 		for (int i = 0; i < x; i++) {
 			for (int j = 0; j < y; j++) {
 				celdas.put(new Coordenada(i,j), EstadoCelda.MUERTA);
 			}
 		}
 	}
-	
+	public Coordenada getDimensiones() {
+		return dimensiones;
+	}
 	public String toString() {
 		int cx=dimensiones.getX();
 		int cy=dimensiones.getY();
 		String tablero="";
 		tablero="+";
-		for(int i=1; i < cx;i++) {
-			tablero+="-";
+		for(int i=1; i <= cx;i++) {
+			tablero+= "-";
 		}
-		tablero+="+\n";
+		tablero+="+ \n";
 		for(int j=0; j < cy; j++) {
 			tablero+="|";
 			for(int i = 0; i < cx; i++) {
@@ -36,31 +43,28 @@ public class Tablero {
 					tablero+= "*";
 				}
 			}
-			tablero+= "+";
+			tablero+="| \n";
 		}
-		for(int i=1;i<=cx;i++) {
+		tablero+="+";
+		for(int i=1;i <= cx;i++) {
 			tablero+= "-";
 		}
-		tablero+= "+\n";
+		tablero= tablero + "+ \n";
 		return tablero;
-	}
-	
-	public Coordenada getDimensiones() {
-		return dimensiones;
 	}
 	public Collection<Coordenada> getPosiciones(){
 		return celdas.keySet();
 	}
 	public void muestraErrorPosicionInvalida(Coordenada c) {
-		StringBuilder sb = new StringBuilder();
+		/*StringBuilder sb = new StringBuilder();
 		sb.append("Error: la celda(");
 		sb.append(c.getX());
 		sb.append(",");
 		sb.append(c.getY());
 		sb.append(") no existe");
-		System.out.println(sb);
+		System.out.println(sb);*/
 		// return sb.toString();
-		//System.out.println("Error: la celda(" +c.getX() + "," + c.getY() + ") no existe");
+		System.out.println("Error: la celda(" +c.getX() + "," + c.getY() + ") no existe");
 	}
 	
 	public EstadoCelda getCelda(Coordenada posicion) {
@@ -76,6 +80,7 @@ public class Tablero {
 		if(celdas.containsKey(posicion)) {
 			celdas.put(posicion, e);
 		}else {
+			System.out.println("hola");
 			muestraErrorPosicionInvalida(posicion);
 		}
 	}
@@ -94,9 +99,9 @@ public class Tablero {
 			vecinas.add(new Coordenada(i - 1, j));
 		}
 		//vecina2
-		coordenada = new Coordenada (i, j + 1);
+		coordenada = new Coordenada (i - 1, j + 1);
 		if(celdas.get(coordenada)!=null) {
-			vecinas.add(new Coordenada(i , j + 1));
+			vecinas.add(new Coordenada(i - 1, j + 1));
 		}
 		//vecina3
 		coordenada = new Coordenada (i, j + 1);
@@ -147,8 +152,7 @@ public class Tablero {
 				celdas.put(c_final,c_status);
 			}
 		}
-		return p_charge;
-		
+		return p_charge;	
 	}
 	
 	

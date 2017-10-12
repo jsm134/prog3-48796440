@@ -6,35 +6,34 @@ package modelo;
 import java.util.ArrayList;
 
 /**
- * @author rootear
+ * @author José Soler Martínez
  *
  */
 public class ReglaConway {
 	public ReglaConway() {}
-	public EstadoCelda calculaSiguienteEstadoCelda(Tablero tablero, Coordenada coordenada) {
-		EstadoCelda nuevo=EstadoCelda.MUERTA;
-		ArrayList<Coordenada> vecinas; //cambiar
-		int vivas = 0; //cambiar
-		vecinas=tablero.getPosicionesVecinasCCW(coordenada);
-		for(int i = 0; i<vecinas.size();i++) {
-			if(tablero.getCelda(vecinas.get(i))==EstadoCelda.VIVA) {
-				vivas++;
+	public EstadoCelda calculaSiguienteEstadoCelda(Tablero tablero, Coordenada posicion) {
+		EstadoCelda new_status=EstadoCelda.MUERTA;
+		ArrayList<Coordenada> c_vecinas = tablero.getPosicionesVecinasCCW(posicion);
+		int c_vivas = 0;
+		for(int i = 0; i<c_vecinas.size();i++) {
+			if(tablero.getCelda(c_vecinas.get(i))==EstadoCelda.VIVA) {
+				c_vivas++;
 			}
 		}
-		if(tablero.getCelda(coordenada)==EstadoCelda.VIVA) {
-			if(vivas==2 || vivas ==3) {
-				nuevo = EstadoCelda.MUERTA;
+		if(tablero.getCelda(posicion)==EstadoCelda.VIVA) {
+			if(c_vivas==2 || c_vivas ==3) {
+				new_status = EstadoCelda.VIVA;
 			}
 			else {
-				nuevo=EstadoCelda.MUERTA;
+				new_status=EstadoCelda.MUERTA;
 			}
 		}else {
-			if(vivas==3) {
-				
+			if(c_vivas==3) {
+				new_status = EstadoCelda.VIVA;
 			}else {
-				
+				new_status = EstadoCelda.MUERTA;
 			}
 		}
-		return null;
+		return new_status;
 	}
 }

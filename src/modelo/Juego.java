@@ -4,6 +4,8 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * @author José Soler Martínez
@@ -18,19 +20,33 @@ public class Juego {
 		this.regla=regla;
 		patronesUsados=new ArrayList<Patron>();
 	}
-	public void cargaPatron(Patron p, Coordenada c) {
-		if(tablero.cargaPatron(p, c)) {
+	public void cargaPatron(Patron p, Coordenada posicionInicial) {
+		if(tablero.cargaPatron(p, posicionInicial)) {
 			patronesUsados.add(p);
+		}else {
+			System.out.print("Error cargando plantilla ");
+			System.out.print(p.getNombre());
+			System.out.print(" en (");
+			System.out.print(posicionInicial.getX());
+			System.out.print(",");
+			System.out.print(posicionInicial.getY());
+			System.out.println(")");
 		}
 	}
 	public void actualiza() {
-		//hay que llamar a siguienteEstadoCelda para
-		//cada posición del tablero
-		Collection<Coordenada> cerdas; //cambiar
-		cerdas=tablero.getPosiciones();
-		for(Coordenada actual : cerdas) {
-			EstadoCelda nuevo=regla.calculaSiguienteEstadoCelda(tablero, actual);
-			tablero.setCelda(actual, nuevo);
+		HashMap<Coordenada, EstadoCelda> celdas = new HashMap<Coordenada, EstadoCelda>();
+		Collection<Coordenada> coordenada;
+		EstadoCelda next_status;
+		
+		coordenada=tablero.getPosiciones();
+		
+		for(Coordenada posicion : coordenada) {
+			next_status=regla.calculaSiguienteEstadoCelda(tablero, posicion);
+			celdas.put(posicion, next_status);
+		}
+		coordenada=celdas.keySet();
+		for(Coordenada c: coordenada) {
+			tablero.setCelda(c, celdas.get(c));
 		}
 	}
 	public Tablero getTablero() {
