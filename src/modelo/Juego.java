@@ -24,13 +24,23 @@ public class Juego {
 		if(tablero.cargaPatron(p, posicionInicial)) {
 			patronesUsados.add(p);
 		}else {
-			System.out.print("Error cargando plantilla ");
+			/*System.out.print("Error cargando plantilla ");
 			System.out.print(p.getNombre());
 			System.out.print(" en (");
 			System.out.print(posicionInicial.getX());
 			System.out.print(",");
 			System.out.print(posicionInicial.getY());
-			System.out.println(")");
+			System.out.println(")");*/
+			///////////////////
+			StringBuilder sb = new StringBuilder();
+			sb.append("Error cargando plantilla ");
+			sb.append(p.getNombre());
+			sb.append(" en (");
+			sb.append(posicionInicial.getX());
+			sb.append(",");
+			sb.append(posicionInicial.getY());
+			sb.append(")");
+			System.out.println(sb);
 		}
 	}
 	public void actualiza() {

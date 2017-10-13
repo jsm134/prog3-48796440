@@ -55,16 +55,16 @@ public class Tablero {
 	public Collection<Coordenada> getPosiciones(){
 		return celdas.keySet();
 	}
-	public void muestraErrorPosicionInvalida(Coordenada c) {
-		/*StringBuilder sb = new StringBuilder();
-		sb.append("Error: la celda(");
+	private void muestraErrorPosicionInvalida(Coordenada c) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Error: la celda (");
 		sb.append(c.getX());
 		sb.append(",");
 		sb.append(c.getY());
 		sb.append(") no existe");
-		System.out.println(sb);*/
+		System.out.println(sb);
 		// return sb.toString();
-		System.out.println("Error: la celda(" +c.getX() + "," + c.getY() + ") no existe");
+		//System.out.println("Error: la celda (" +c.getX() + "," + c.getY() + ") no existe");
 	}
 	
 	public EstadoCelda getCelda(Coordenada posicion) {
@@ -80,7 +80,6 @@ public class Tablero {
 		if(celdas.containsKey(posicion)) {
 			celdas.put(posicion, e);
 		}else {
-			System.out.println("hola");
 			muestraErrorPosicionInvalida(posicion);
 		}
 	}
