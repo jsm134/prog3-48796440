@@ -23,7 +23,13 @@ public class Patron {
 		return tablero.getCelda(posicion);
 	}
 	public Collection<Coordenada> getPosiciones(){
-		return tablero.getPosiciones();
+		Collection<Coordenada> posiciones;
+		if(tablero==null) {
+			posiciones=null;
+		}else {
+			posiciones=tablero.getPosiciones();
+		}
+		return posiciones;
 	}
 	@Override
 	public String toString() {

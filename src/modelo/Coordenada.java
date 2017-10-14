@@ -27,8 +27,8 @@ public class Coordenada {
 	 * Finalmente se suma 1 en NUMERO_COORDENADAS por una nueva coordenada creada
 	 */
 	public Coordenada (Coordenada otra) {
-		x=otra.x;
-		y=otra.y;
+		this.x=otra.x;
+		this.y=otra.y;
 		NUMERO_COORDENADAS++;
 	}
 	@Override

@@ -26,34 +26,34 @@ public class Tablero {
 		return dimensiones;
 	}
 	public String toString() {
+		StringBuilder sb = new StringBuilder();
 		int cx=dimensiones.getX();
 		int cy=dimensiones.getY();
-		String tablero="";
-		tablero="+";
+		sb.append("+");
 		for(int i=1; i <= cx;i++) {
-			tablero+= "-";
+			sb.append("-");
 		}
-		tablero+="+ \n";
+		sb.append("+\n");
 		for(int j=0; j < cy; j++) {
-			tablero+="|";
+			sb.append("|");
 			for(int i = 0; i < cx; i++) {
 				if(celdas.get(new Coordenada(i,j)) == EstadoCelda.MUERTA) {
-					tablero+= " ";
+					sb.append(" ");
 				}else {
-					tablero+= "*";
+					sb.append("*");
 				}
 			}
-			tablero+="| \n";
+			sb.append("|\n");
 		}
-		tablero+="+";
+		sb.append("+");
 		for(int i=1;i <= cx;i++) {
-			tablero+= "-";
+			sb.append("-");
 		}
-		tablero= tablero + "+ \n";
-		return tablero;
+		sb.append("+\n");
+		return sb.toString();
 	}
 	public Collection<Coordenada> getPosiciones(){
-		return celdas.keySet();
+			return celdas.keySet();
 	}
 	private void muestraErrorPosicionInvalida(Coordenada c) {
 		StringBuilder sb = new StringBuilder();
@@ -63,8 +63,6 @@ public class Tablero {
 		sb.append(c.getY());
 		sb.append(") no existe");
 		System.out.println(sb);
-		// return sb.toString();
-		//System.out.println("Error: la celda (" +c.getX() + "," + c.getY() + ") no existe");
 	}
 	
 	public EstadoCelda getCelda(Coordenada posicion) {
@@ -132,26 +130,34 @@ public class Tablero {
 	
 	public boolean cargaPatron(Patron patron, Coordenada coordenadaInicial) {
 		boolean p_charge = true;
-		Coordenada c_final;
-		Collection<Coordenada> cp;
-		cp = patron.getPosiciones();
-		for(Coordenada select:cp) {
-			c_final=select.suma(coordenadaInicial);
-			if(celdas.containsKey(c_final) == false){
-				p_charge=false;
+		Coordenada c_final = null;
+		Collection<Coordenada> coordenada;
+		if(patron != null && coordenadaInicial != null) {
+			coordenada = patron.getPosiciones();
+			if(coordenada!=null) {
+				for(Coordenada select:coordenada) {
+					c_final=select.suma(coordenadaInicial);
+					if(celdas.containsKey(c_final) == false){
+						p_charge=false;
+					}
+				}
+			
+				EstadoCelda c_status;
+				if(p_charge==true) {
+					coordenada = patron.getPosiciones();
+					for(Coordenada select:coordenada) {
+						c_final=select.suma(coordenadaInicial);
+						c_status=patron.getCelda(select);
+						celdas.put(c_final,c_status);
+					}
+				}else {
+					muestraErrorPosicionInvalida(c_final);
+				}
 			}
+		}else {
+			p_charge=false;
 		}
-		EstadoCelda c_status;
-		//comprobar que se puede hacer el patrón en ese sitio
-		if(p_charge==true) {
-			cp = patron.getPosiciones();
-			for(Coordenada select:cp) {
-				c_final=select.suma(coordenadaInicial);
-				c_status=patron.getCelda(select);
-				celdas.put(c_final,c_status);
-			}
-		}
-		return p_charge;	
+		return p_charge;
 	}
 	
 	
