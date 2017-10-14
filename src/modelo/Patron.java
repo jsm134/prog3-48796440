@@ -33,11 +33,10 @@ public class Patron {
 	}
 	@Override
 	public String toString() {
-		String s = getNombre();
-		s+="\n";
-		s+=tablero.toString();
-		//System.out.println(getNombre());
-		//return tablero.toString();
-		return s;
+		StringBuilder sb = new StringBuilder();
+		sb.append(getNombre());
+		sb.append("\n");
+		sb.append(tablero.toString());
+		return sb.toString();
 	}
 }
