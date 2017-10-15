@@ -10,18 +10,42 @@ import java.util.Collection;
  *
  */
 public class Patron {
+	/**
+	 * 
+	 */
 	private String nombre;
+	/**
+	 * 
+	 */
 	private Tablero tablero;
+	/**
+	 * 
+	 * @param nombre
+	 * @param tablero
+	 */
 	public Patron(String nombre, Tablero tablero) {
 		this.nombre = nombre;
 		this.tablero = tablero;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public String getNombre() {
 		return nombre;
 	}
+	/**
+	 * 
+	 * @param posicion
+	 * @return
+	 */
 	public EstadoCelda getCelda(Coordenada posicion) {
 		return tablero.getCelda(posicion);
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public Collection<Coordenada> getPosiciones(){
 		Collection<Coordenada> posiciones;
 		if(tablero==null) {

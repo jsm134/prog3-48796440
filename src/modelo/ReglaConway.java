@@ -11,6 +11,12 @@ import java.util.ArrayList;
  */
 public class ReglaConway {
 	public ReglaConway() {}
+	/**
+	 * 
+	 * @param tablero
+	 * @param posicion
+	 * @return
+	 */
 	public EstadoCelda calculaSiguienteEstadoCelda(Tablero tablero, Coordenada posicion) {
 		EstadoCelda new_status=EstadoCelda.MUERTA;
 		ArrayList<Coordenada> c_vecinas = tablero.getPosicionesVecinasCCW(posicion);

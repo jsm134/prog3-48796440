@@ -20,18 +20,15 @@ public class Juego {
 		this.regla=regla;
 		patronesUsados=new ArrayList<Patron>();
 	}
+	/**
+	 * 
+	 * @param p
+	 * @param posicionInicial
+	 */
 	public void cargaPatron(Patron p, Coordenada posicionInicial) {
 		if(tablero.cargaPatron(p, posicionInicial)) {
 			patronesUsados.add(p);
 		}else {
-			/*System.out.print("Error cargando plantilla ");
-			System.out.print(p.getNombre());
-			System.out.print(" en (");
-			System.out.print(posicionInicial.getX());
-			System.out.print(",");
-			System.out.print(posicionInicial.getY());
-			System.out.println(")");*/
-			///////////////////
 			StringBuilder sb = new StringBuilder();
 			sb.append("Error cargando plantilla ");
 			sb.append(p.getNombre());
@@ -43,6 +40,9 @@ public class Juego {
 			System.out.println(sb);
 		}
 	}
+	/**
+	 * 
+	 */
 	public void actualiza() {
 		HashMap<Coordenada, EstadoCelda> celdas = new HashMap<Coordenada, EstadoCelda>();
 		Collection<Coordenada> coordenada;
@@ -59,9 +59,17 @@ public class Juego {
 			tablero.setCelda(c, celdas.get(c));
 		}
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public Tablero getTablero() {
 		return tablero;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<Patron> getPatrones(){
 		return patronesUsados;
 	}
