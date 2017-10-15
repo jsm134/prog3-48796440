@@ -53,7 +53,7 @@ public class Juego {
 			sb.append(",");
 			sb.append(posicionInicial.getY());
 			sb.append(")");
-			System.out.println(sb);
+			System.err.println(sb);
 		}
 	}
 	/**

@@ -91,7 +91,7 @@ public class Tablero {
 		sb.append(",");
 		sb.append(c.getY());
 		sb.append(") no existe");
-		System.out.println(sb);
+		System.err.println(sb);
 	}
 	/**
 	 * Getter: devuelve el estado de una celda, en el caso de que exista se mostrará dicho estado y en caso contrario se mostrará null
