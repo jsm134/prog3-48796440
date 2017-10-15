@@ -8,7 +8,7 @@ import java.util.Set;
  * Clase Tablero: sirve para crear el tablero a partir del cual se va a trabajar, tambien se utiliza
  * para imprimir dicho tablero, obtener las posiciones de un patron, saber si es posibile que una celda se pueda ubicar
  * dentro del tablero, crear strings, poder saber si existen celdas vecinas o no y definir la posicion de una celda
- * @author José Soler Martínez 48796440P
+ * @author Jose Soler Martinez 48796440P
  */
 public class Tablero {
 	/**
@@ -44,7 +44,7 @@ public class Tablero {
 		return dimensiones;
 	}
 	/**
-	 * String que crea el tablero de forma visual mediante el uso de un StringBuilder para que sea más eficiente
+	 * String que crea el tablero de forma visual mediante el uso de un StringBuilder para que sea mas eficiente
 	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
