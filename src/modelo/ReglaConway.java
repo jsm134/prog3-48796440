@@ -6,16 +6,20 @@ package modelo;
 import java.util.ArrayList;
 
 /**
+ * Clae ReglaConway, permite el uso de la ReglaConway para el correspondiete transcurso del juego
+ * de la vida
  * @author José Soler Martínez
- *
  */
 public class ReglaConway {
+	/**
+	 * Llamada a la ReglaConway
+	 */
 	public ReglaConway() {}
 	/**
-	 * 
-	 * @param tablero
-	 * @param posicion
-	 * @return
+	 * Constructor: dada una celda del tablero, devuelve el nuevo estado que tendrá esa celda
+	 * @param tablero paremetro pasado por referencia que incluye el tablero a utilizar
+	 * @param posicion parametro pasado por referencia que incluye la posicion a evaluar
+	 * @return new_status variable que guarda el estado de la nueva celda
 	 */
 	public EstadoCelda calculaSiguienteEstadoCelda(Tablero tablero, Coordenada posicion) {
 		EstadoCelda new_status=EstadoCelda.MUERTA;
