@@ -169,8 +169,6 @@ public class Tablero {
 			coordenada = new Coordenada (i, j - 1);
 			if(celdas.get(coordenada)!=null) {
 				vecinas.add(new Coordenada(i, j - 1));
-			}else {
-				
 			}
 		}
 		return vecinas;
