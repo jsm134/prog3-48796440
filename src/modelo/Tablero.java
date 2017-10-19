@@ -41,7 +41,7 @@ public class Tablero {
 	 * @return dimensiones valor que al macena las dimensiones del tablero
 	 */
 	public Coordenada getDimensiones() {
-		return dimensiones;
+		return new Coordenada(dimensiones.getX(), dimensiones.getY());
 	}
 	/**
 	 * String que crea el tablero de forma visual mediante el uso de un StringBuilder para que sea mas eficiente
@@ -86,7 +86,7 @@ public class Tablero {
 	 */
 	private void muestraErrorPosicionInvalida(Coordenada c) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Error: la celda (");
+		sb.append("Error: La celda (");
 		sb.append(c.getX());
 		sb.append(",");
 		sb.append(c.getY());
