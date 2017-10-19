@@ -129,45 +129,49 @@ public class Tablero {
 		ArrayList<Coordenada> vecinas = new ArrayList<Coordenada>();
 		int i=posicion.getX();
 		int j=posicion.getY();
-		//vecina0
-		Coordenada coordenada = new Coordenada (i - 1, j - 1);
-		if(celdas.get(coordenada)!=null) {
-			vecinas.add(new Coordenada(i - 1, j - 1));
-		}
-		//vecina1
-		coordenada = new Coordenada (i - 1, j);
-		if(celdas.get(coordenada)!=null) {
-			vecinas.add(new Coordenada(i - 1, j));
-		}
-		//vecina2
-		coordenada = new Coordenada (i - 1, j + 1);
-		if(celdas.get(coordenada)!=null) {
-			vecinas.add(new Coordenada(i - 1, j + 1));
-		}
-		//vecina3
-		coordenada = new Coordenada (i, j + 1);
-		if(celdas.get(coordenada)!=null) {
-			vecinas.add(new Coordenada(i , j + 1));
-		}
-		//vecina4
-		coordenada = new Coordenada (i + 1, j + 1);
-		if(celdas.get(coordenada)!=null) {
-			vecinas.add(new Coordenada(i + 1, j + 1));
-		}
-		//vecina5
-		coordenada = new Coordenada (i + 1, j);
-		if(celdas.get(coordenada)!=null) {
-			vecinas.add(new Coordenada(i + 1, j));
-		}
-		//vecina6
-		coordenada = new Coordenada (i + 1, j - 1);
-		if(celdas.get(coordenada)!=null) {
-			vecinas.add(new Coordenada(i + 1, j - 1));
-		}
-		//vecina7
-		coordenada = new Coordenada (i, j - 1);
-		if(celdas.get(coordenada)!=null) {
-			vecinas.add(new Coordenada(i, j - 1));
+		if(celdas.containsKey(posicion)) {
+			//vecina0
+			Coordenada coordenada = new Coordenada (i - 1, j - 1);
+			if(celdas.get(coordenada)!=null) {
+				vecinas.add(new Coordenada(i - 1, j - 1));
+			}
+			//vecina1
+			coordenada = new Coordenada (i - 1, j);
+			if(celdas.get(coordenada)!=null) {
+				vecinas.add(new Coordenada(i - 1, j));
+			}
+			//vecina2
+			coordenada = new Coordenada (i - 1, j + 1);
+			if(celdas.get(coordenada)!=null) {
+				vecinas.add(new Coordenada(i - 1, j + 1));
+			}
+			//vecina3
+			coordenada = new Coordenada (i, j + 1);
+			if(celdas.get(coordenada)!=null) {
+				vecinas.add(new Coordenada(i , j + 1));
+			}
+			//vecina4
+			coordenada = new Coordenada (i + 1, j + 1);
+			if(celdas.get(coordenada)!=null) {
+				vecinas.add(new Coordenada(i + 1, j + 1));
+			}
+			//vecina5
+			coordenada = new Coordenada (i + 1, j);
+			if(celdas.get(coordenada)!=null) {
+				vecinas.add(new Coordenada(i + 1, j));
+			}
+			//vecina6
+			coordenada = new Coordenada (i + 1, j - 1);
+			if(celdas.get(coordenada)!=null) {
+				vecinas.add(new Coordenada(i + 1, j - 1));
+			}
+			//vecina7
+			coordenada = new Coordenada (i, j - 1);
+			if(celdas.get(coordenada)!=null) {
+				vecinas.add(new Coordenada(i, j - 1));
+			}else {
+				
+			}
 		}
 		return vecinas;
 	}
