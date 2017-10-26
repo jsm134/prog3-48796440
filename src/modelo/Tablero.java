@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
+
+import modelo.excepciones.*;
 /**
  * Clase Tablero: sirve para crear el tablero a partir del cual se va a trabajar, tambien se utiliza
  * para imprimir dicho tablero, obtener las posiciones de un patron, saber si es posibile que una celda se pueda ubicar
@@ -24,15 +26,24 @@ public class Tablero {
 	 * @param dimensiones Dimensiones del tablero
 	 * @param x guarda la extension horizontal del tablero
 	 * @param y guarda la extension vertical del tablero
+	 * @throw ExcepcionCoordenadaIncorrecta
 	 */
-	public Tablero(Coordenada dimensiones){
+	public Tablero(Coordenada dimensiones)throws ExcepcionArgumentosIncorrectos, ExcepcionEjecucion{
 		celdas=new HashMap<Coordenada, EstadoCelda>();
-		int x=dimensiones.getX();
-		int y=dimensiones.getY();
-		this.dimensiones=dimensiones;
-		for (int i = 0; i < x; i++) {
-			for (int j = 0; j < y; j++) {
-				celdas.put(new Coordenada(i,j), EstadoCelda.MUERTA);
+		if(dimensiones==null) {
+			throw new ExcepcionArgumentosIncorrectos();
+		}else {
+			try {
+				int x=dimensiones.getX();
+				int y=dimensiones.getY();
+				this.dimensiones=dimensiones;
+				for (int i = 0; i < x; i++) {
+					for (int j = 0; j < y; j++) {
+							celdas.put(new Coordenada(i,j), EstadoCelda.MUERTA);
+					}
+				}
+			}catch(ExcepcionCoordenadaIncorrecta coord) {
+				throw new ExcepcionEjecucion(coord);
 			}
 		}
 	}
@@ -41,7 +52,11 @@ public class Tablero {
 	 * @return dimensiones valor que al macena las dimensiones del tablero
 	 */
 	public Coordenada getDimensiones() {
-		return new Coordenada(dimensiones.getX(), dimensiones.getY());
+		try {
+			return new Coordenada(dimensiones.getX(), dimensiones.getY());
+		}catch (ExcepcionCoordenadaIncorrecta coordenada) {
+			throw new ExcepcionEjecucion(coordenada);
+		}
 	}
 	/**
 	 * String que crea el tablero de forma visual mediante el uso de un StringBuilder para que sea mas eficiente
@@ -99,11 +114,15 @@ public class Tablero {
 	 * @return celdas.get(posicion) devuelve la posicion valida de una coordenada
 	 * @return null la coordenada no ha sido valida
 	 */
-	public EstadoCelda getCelda(Coordenada posicion) {
+	public EstadoCelda getCelda(Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
+		if(posicion==null) {
+			throw new ExcepcionArgumentosIncorrectos();
+		}
 		Set<Coordenada> coordenadas = celdas.keySet();
 		if(coordenadas.contains(posicion)==false) {
-			muestraErrorPosicionInvalida(posicion);
-			return null;
+			//muestraErrorPosicionInvalida(posicion);
+			throw new ExcepcionPosicionFueraTablero(dimensiones, posicion); //donde tengamos el mensaje MuestraError...
+			//return null;
 		}else {
 			return celdas.get(posicion);
 		}
@@ -114,6 +133,9 @@ public class Tablero {
 	 * @param e variable pasada por referencia que contiene el estado de la celda
 	 */
 	public void setCelda(Coordenada posicion, EstadoCelda e) {
+		 if(posicion==null || e==null){
+		 	throw new ExcepcionArgumentosIncorrectos();
+		 }
 		if(celdas.containsKey(posicion)) {
 			celdas.put(posicion, e);
 		}else {
@@ -125,10 +147,16 @@ public class Tablero {
 	 * @param posicion parametro pasado por referencia de la clase Coordenada que tiene la posicion inicial a partir de la cual se buscan las vecinas
 	 * @return vecinas devuelve el conjunto de las variables vecinas a la principal
 	 */
-	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion){
+	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
 		ArrayList<Coordenada> vecinas = new ArrayList<Coordenada>();
 		int i=posicion.getX();
 		int j=posicion.getY();
+		if(posicion == null) {
+			throw new ExcepcionArgumentosIncorrectos();
+		}
+		if(celdas.containsKey(posicion)==false) {
+			throw new ExcepcionPosicionFueraTablero(dimensiones, posicion);
+		}
 		if(celdas.containsKey(posicion)) {
 			//vecina0
 			Coordenada coordenada = new Coordenada (i - 1, j - 1);
@@ -178,8 +206,10 @@ public class Tablero {
 	 * @param patron variable que guarda patron pasado por referencia
 	 * @param coordenadaInicial variable que guarda la coordenada por la cual comienza el patron
 	 * @return p_charge permite conocer si es posible o no crear el patron (devuelve true o false)
+	 * @throws ExcepcionCoordenadaIncorrecta 
+	 * @throws ExcepcionArgumentosIncorrectos 
 	 */
-	public boolean cargaPatron(Patron patron, Coordenada coordenadaInicial) {
+	public boolean cargaPatron(Patron patron, Coordenada coordenadaInicial) throws ExcepcionArgumentosIncorrectos, ExcepcionCoordenadaIncorrecta {
 		boolean p_charge = true;
 		Coordenada c_final = null;
 		Collection<Coordenada> coordenada;
