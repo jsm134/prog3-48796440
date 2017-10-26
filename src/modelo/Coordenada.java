@@ -1,4 +1,5 @@
 package modelo;
+import modelo.excepciones.*;
 /**
  * Representa la clase Coordenada del proyecto, donde se realizan 
  * diferentes creaciones y modificaciones de las coordenadas.
@@ -15,10 +16,14 @@ public class Coordenada {
 	 * @param y Número entero que representa la el parámetro y de la coordenada
 	 * Finalmente se suma 1 en NUMERO_COORDENADAS por la nueva coordenada creada
 	 */
-	public Coordenada(int x, int y) {
-		this.x=x;
-		this.y=y;
-		NUMERO_COORDENADAS++;
+	public Coordenada(int x, int y) throws ExcepcionCoordenadaIncorrecta{
+		if(x<0 || y<0) {
+			throw new ExcepcionCoordenadaIncorrecta();
+		}else {
+			this.x=x;
+			this.y=y;
+			NUMERO_COORDENADAS++;
+		}
 	}
 	/**
 	 * Este es un constructor de coordenadas (otra.x,otra.y)
@@ -26,10 +31,14 @@ public class Coordenada {
 	 * y así poder operarlas o trabajar con ellas (x,y) - (otra.x,otra.y)
 	 * Finalmente se suma 1 en NUMERO_COORDENADAS por una nueva coordenada creada
 	 */
-	public Coordenada (Coordenada otra) {
-		this.x=otra.x;
-		this.y=otra.y;
-		NUMERO_COORDENADAS++;
+	public Coordenada (Coordenada otra) throws ExcepcionArgumentosIncorrectos {
+		if(otra == null) {
+			throw new ExcepcionArgumentosIncorrectos();
+		}else {
+			this.x=otra.x;
+			this.y=otra.y;
+			NUMERO_COORDENADAS++;
+		}
 	}
 	@Override
 	public int hashCode() {
@@ -84,9 +93,14 @@ public class Coordenada {
 	 * @param otra segundo parámetro que se utiliza para operar
 	 * @return new Coordenada(x+otra.x,y+otra.y): un puntero con dos parámetros que llama al método
 	 * Coordenada(int x, int y)
+	 * @throws ExcepcionCoordenadaIncorrecta, ExcepcionArgumentosIncorrectos
 	 */
-	public Coordenada suma (Coordenada otra) {
-		return new Coordenada (x+otra.x,y+otra.y);
+	public Coordenada suma (Coordenada otra) throws ExcepcionCoordenadaIncorrecta, ExcepcionArgumentosIncorrectos {
+		if(otra==null) {
+			throw new ExcepcionArgumentosIncorrectos();
+		}else {
+			return new Coordenada (x+otra.x,y+otra.y);
+		}
 	}
 	
 }
