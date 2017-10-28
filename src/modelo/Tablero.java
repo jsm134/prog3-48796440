@@ -6,33 +6,18 @@ import java.util.HashMap;
 import java.util.Set;
 
 import modelo.excepciones.*;
-/**
- * Clase Tablero: sirve para crear el tablero a partir del cual se va a trabajar, tambien se utiliza
- * para imprimir dicho tablero, obtener las posiciones de un patron, saber si es posibile que una celda se pueda ubicar
- * dentro del tablero, crear strings, poder saber si existen celdas vecinas o no y definir la posicion de una celda
- * @author Jose Soler Martinez 48796440P
- */
+
 public class Tablero {
-	/**
-	 * Atributo que permite guardar las dimensiones del tablero
-	 */
+
 	private Coordenada dimensiones;
-	/**
-	 * Atributo que relaciona una coordenada con su estado
-	 */
+
 	private HashMap<Coordenada,EstadoCelda> celdas;
-	/**
-	 * Constructor: crea un tablero con las dimensiones que se le pasan por parámetro
-	 * @param dimensiones Dimensiones del tablero
-	 * @param x guarda la extension horizontal del tablero
-	 * @param y guarda la extension vertical del tablero
-	 * @throw ExcepcionCoordenadaIncorrecta
-	 */
+
 	public Tablero(Coordenada dimensiones)throws ExcepcionArgumentosIncorrectos, ExcepcionEjecucion{
 		celdas=new HashMap<Coordenada, EstadoCelda>();
 		if(dimensiones==null) {
 			throw new ExcepcionArgumentosIncorrectos();
-		}else {
+		}else{
 			try {
 				int x=dimensiones.getX();
 				int y=dimensiones.getY();
@@ -47,10 +32,7 @@ public class Tablero {
 			}
 		}
 	}
-	/**
-	 * Getter: devuelve las dimensiones del tablero
-	 * @return dimensiones valor que al macena las dimensiones del tablero
-	 */
+
 	public Coordenada getDimensiones() {
 		try {
 			return new Coordenada(dimensiones.getX(), dimensiones.getY());
@@ -58,9 +40,7 @@ public class Tablero {
 			throw new ExcepcionEjecucion(coordenada);
 		}
 	}
-	/**
-	 * String que crea el tablero de forma visual mediante el uso de un StringBuilder para que sea mas eficiente
-	 */
+
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		int cx=dimensiones.getX();
@@ -88,17 +68,11 @@ public class Tablero {
 		sb.append("+\n");
 		return sb.toString();
 	}
-	/**
-	 * Getter: devuelve las posiciones de las celdas en el tablero
-	 * @return celdas.keySet() variable que almacena la posición de las celdas en el tablero
-	 */
+
 	public Collection<Coordenada> getPosiciones(){
 			return celdas.keySet();
 	}
-	/**
-	 * Permite la creaciónde un texto de error a partir de una posicion invalida a la que no se puede acceder
-	 * @param c variable de la clase Coordenada que se utiliza como referencia para mostrar el error
-	 */
+
 	private void muestraErrorPosicionInvalida(Coordenada c) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Error: La celda (");
@@ -108,12 +82,7 @@ public class Tablero {
 		sb.append(") no existe");
 		System.err.println(sb);
 	}
-	/**
-	 * Getter: devuelve el estado de una celda, en el caso de que exista se mostrará dicho estado y en caso contrario se mostrará null
-	 * @param posicion variable de la clase Coordenada que se pasa por parametro para evaluar si existe o no
-	 * @return celdas.get(posicion) devuelve la posicion valida de una coordenada
-	 * @return null la coordenada no ha sido valida
-	 */
+
 	public EstadoCelda getCelda(Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
 		if(posicion==null) {
 			throw new ExcepcionArgumentosIncorrectos();
@@ -127,11 +96,7 @@ public class Tablero {
 			return celdas.get(posicion);
 		}
 	}
-	/**
-	 * Setter: asigna a la celda posicion el estado de celda e
-	 * @param posicion variable pasada por referencia que contiene una posicion del tablero
-	 * @param e variable pasada por referencia que contiene el estado de la celda
-	 */
+
 	public void setCelda(Coordenada posicion, EstadoCelda e) {
 		 if(posicion==null || e==null){
 		 	throw new ExcepcionArgumentosIncorrectos();
@@ -142,73 +107,128 @@ public class Tablero {
 			muestraErrorPosicionInvalida(posicion);
 		}
 	}
-	/**
-	 * Constructor: permite la creación de una coordenada a partir de las de su alrededor
-	 * @param posicion parametro pasado por referencia de la clase Coordenada que tiene la posicion inicial a partir de la cual se buscan las vecinas
-	 * @return vecinas devuelve el conjunto de las variables vecinas a la principal
-	 */
+
 	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
 		ArrayList<Coordenada> vecinas = new ArrayList<Coordenada>();
-		int i=posicion.getX();
-		int j=posicion.getY();
+		
 		if(posicion == null) {
 			throw new ExcepcionArgumentosIncorrectos();
 		}
 		if(celdas.containsKey(posicion)==false) {
 			throw new ExcepcionPosicionFueraTablero(dimensiones, posicion);
 		}
+		int i=posicion.getX();
+		int j=posicion.getY();
 		if(celdas.containsKey(posicion)) {
+			Coordenada coordenada;
 			//vecina0
-			Coordenada coordenada = new Coordenada (i - 1, j - 1);
-			if(celdas.get(coordenada)!=null) {
-				vecinas.add(new Coordenada(i - 1, j - 1));
+			try {
+				coordenada = new Coordenada (i - 1, j - 1);
+				if(celdas.get(coordenada)!=null) {
+					try {
+						vecinas.add(new Coordenada(i - 1, j - 1));
+					}catch(ExcepcionCoordenadaIncorrecta error) {
+						throw new ExcepcionEjecucion(error);
+					}
+				}
+			}catch(ExcepcionCoordenadaIncorrecta error) {
+				
 			}
 			//vecina1
-			coordenada = new Coordenada (i - 1, j);
-			if(celdas.get(coordenada)!=null) {
-				vecinas.add(new Coordenada(i - 1, j));
+			try {
+				coordenada = new Coordenada (i - 1, j);
+				if(celdas.get(coordenada)!=null) {
+					try {
+						vecinas.add(new Coordenada(i - 1, j));
+					}catch(ExcepcionCoordenadaIncorrecta error) {
+						throw new ExcepcionEjecucion(error);
+					}
+				}
+			}catch(ExcepcionCoordenadaIncorrecta error) {
+				
 			}
 			//vecina2
-			coordenada = new Coordenada (i - 1, j + 1);
-			if(celdas.get(coordenada)!=null) {
-				vecinas.add(new Coordenada(i - 1, j + 1));
+			try {
+				coordenada = new Coordenada (i - 1, j + 1);
+				if(celdas.get(coordenada)!=null) {
+					try {
+						vecinas.add(new Coordenada(i - 1, j + 1));
+					}catch(ExcepcionCoordenadaIncorrecta error) {
+						throw new ExcepcionEjecucion(error);
+					}
+				}
+			}catch(ExcepcionCoordenadaIncorrecta error) {
+				
 			}
 			//vecina3
-			coordenada = new Coordenada (i, j + 1);
-			if(celdas.get(coordenada)!=null) {
-				vecinas.add(new Coordenada(i , j + 1));
+			try {
+				coordenada = new Coordenada (i, j + 1);
+				if(celdas.get(coordenada)!=null) {
+					try {
+						vecinas.add(new Coordenada(i , j + 1));
+					}catch(ExcepcionCoordenadaIncorrecta error) {
+						throw new ExcepcionEjecucion(error);
+					}
+				}
+			}catch(ExcepcionCoordenadaIncorrecta error) {
+				
 			}
 			//vecina4
-			coordenada = new Coordenada (i + 1, j + 1);
-			if(celdas.get(coordenada)!=null) {
-				vecinas.add(new Coordenada(i + 1, j + 1));
+			try {
+				coordenada = new Coordenada (i + 1, j + 1);
+				if(celdas.get(coordenada)!=null) {
+					try {
+						vecinas.add(new Coordenada(i + 1, j + 1));
+					}catch(ExcepcionCoordenadaIncorrecta error) {
+						throw new ExcepcionEjecucion(error);
+					}
+				}
+			}catch(ExcepcionCoordenadaIncorrecta error) {
+				
 			}
 			//vecina5
-			coordenada = new Coordenada (i + 1, j);
-			if(celdas.get(coordenada)!=null) {
-				vecinas.add(new Coordenada(i + 1, j));
+			try {
+				coordenada = new Coordenada (i + 1, j);
+				if(celdas.get(coordenada)!=null) {
+					try {
+						vecinas.add(new Coordenada(i + 1, j));
+					}catch(ExcepcionCoordenadaIncorrecta error) {
+						throw new ExcepcionEjecucion(error);
+					}
+				}
+			}catch(ExcepcionCoordenadaIncorrecta error) {
+				
 			}
 			//vecina6
-			coordenada = new Coordenada (i + 1, j - 1);
-			if(celdas.get(coordenada)!=null) {
-				vecinas.add(new Coordenada(i + 1, j - 1));
+			try {
+				coordenada = new Coordenada (i + 1, j - 1);
+				if(celdas.get(coordenada)!=null) {
+					try {
+						vecinas.add(new Coordenada(i + 1, j - 1));
+					}catch(ExcepcionCoordenadaIncorrecta error) {
+						throw new ExcepcionEjecucion(error);
+					}
+				}
+			}catch(ExcepcionCoordenadaIncorrecta error) {
+				
 			}
 			//vecina7
-			coordenada = new Coordenada (i, j - 1);
-			if(celdas.get(coordenada)!=null) {
-				vecinas.add(new Coordenada(i, j - 1));
+			try {
+				coordenada = new Coordenada (i, j - 1);
+				if(celdas.get(coordenada)!=null) {
+					try {
+						vecinas.add(new Coordenada(i, j - 1));
+					}catch(ExcepcionCoordenadaIncorrecta error) {
+						throw new ExcepcionEjecucion(error);
+					}
+				}
+			}catch(ExcepcionCoordenadaIncorrecta error) {
+				
 			}
 		}
 		return vecinas;
 	}
-	/**
-	 * Booleano: este metodo permite conocer si es posible cargar el patron o no especificado a partir de una coordenada inicial
-	 * @param patron variable que guarda patron pasado por referencia
-	 * @param coordenadaInicial variable que guarda la coordenada por la cual comienza el patron
-	 * @return p_charge permite conocer si es posible o no crear el patron (devuelve true o false)
-	 * @throws ExcepcionCoordenadaIncorrecta 
-	 * @throws ExcepcionArgumentosIncorrectos 
-	 */
+
 	public boolean cargaPatron(Patron patron, Coordenada coordenadaInicial) throws ExcepcionArgumentosIncorrectos, ExcepcionCoordenadaIncorrecta {
 		boolean p_charge = true;
 		Coordenada c_final = null;
@@ -240,11 +260,7 @@ public class Tablero {
 		}
 		return p_charge;
 	}
-	/**
-	 * Booleano: debuelve true solo si la posicion se encuentra entre las celdas inicializadas del tablero
-	 * @param posicion variable pasada por referencia que contiene la posicion a evaluar
-	 * @return celdas.containsKey(posicion) devuelve el contenido de dicha posicion
-	 */
+
 	public boolean contiene(Coordenada posicion) {
 		return celdas.containsKey(posicion);
 	}
