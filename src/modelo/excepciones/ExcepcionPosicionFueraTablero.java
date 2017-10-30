@@ -16,6 +16,6 @@ public class ExcepcionPosicionFueraTablero extends Exception{
 		return dimensiones;
 	}
 	public String getMessage() {
-		return "error";
+		return "Error: Posicion Fuera del Tablero";
 	}
 }
