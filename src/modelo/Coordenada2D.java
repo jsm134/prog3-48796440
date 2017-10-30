@@ -4,7 +4,7 @@ import modelo.excepciones.*;
 public class Coordenada2D extends Coordenada {
 	private int x;
 	private int y;
-	private static int NUMERO_COORDENADAS;
+	//private static int NUMERO_COORDENADAS;
 
 	public Coordenada2D(int x, int y) throws ExcepcionCoordenadaIncorrecta{
 		if(x<0 || y<0) {
@@ -12,7 +12,7 @@ public class Coordenada2D extends Coordenada {
 		}else {
 			this.x=x;
 			this.y=y;
-			NUMERO_COORDENADAS++;
+			//NUMERO_COORDENADAS++;
 		}
 	}
 
@@ -22,7 +22,7 @@ public class Coordenada2D extends Coordenada {
 		}else{
 			this.x=otra.x;
 			this.y=otra.y;
-			NUMERO_COORDENADAS++;
+			//NUMERO_COORDENADAS++;
 		}
 	}
 	
@@ -52,9 +52,9 @@ public class Coordenada2D extends Coordenada {
 		return true;
 	}
 
-	public static int getNumeroCoordenadas() {
+	/*public static int getNumeroCoordenadas() {
 		return NUMERO_COORDENADAS;
-	}
+	}*/
 	@Override
 	public String toString() {
 		return "(" + this.x + "," + this.y + ")";
