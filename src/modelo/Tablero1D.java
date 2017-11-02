@@ -1,12 +1,14 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import modelo.excepciones.*;
 
 public class Tablero1D extends Tablero {
 	public Tablero1D(int cx) throws ExcepcionCoordenadaIncorrecta, ExcepcionArgumentosIncorrectos{
 		super(new Coordenada1D(cx));
+		celdas=new HashMap<Coordenada, EstadoCelda>();
 			try {
 				for (int i = 0; i < cx; i++) {
 					celdas.put(new Coordenada1D(i), EstadoCelda.MUERTA);
@@ -28,7 +30,7 @@ public class Tablero1D extends Tablero {
 				if(i - 1 >=0) {
 					vecinas.add(new Coordenada1D(i-1));
 				}
-				if(i+1 <= ((Coordenada1D)dimensiones).getX());{
+				if(i+1 <= ((Coordenada1D)dimensiones).getX()){
 					vecinas.add(new Coordenada1D(i+1));
 				}
 			}catch(ExcepcionCoordenadaIncorrecta error) {

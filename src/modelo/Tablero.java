@@ -7,41 +7,26 @@ import java.util.Set;
 
 import modelo.excepciones.*;
 
-public class Tablero {
+public abstract class Tablero {
 
-	private Coordenada dimensiones;
+	protected Coordenada dimensiones;
 
-	private HashMap<Coordenada,EstadoCelda> celdas;
+	protected HashMap<Coordenada,EstadoCelda> celdas;
 
 	public Tablero(Coordenada dimensiones)throws ExcepcionArgumentosIncorrectos, ExcepcionEjecucion{
-		celdas=new HashMap<Coordenada, EstadoCelda>();
+		//celdas=new HashMap<Coordenada, EstadoCelda>();
 		if(dimensiones==null) {
 			throw new ExcepcionArgumentosIncorrectos();
-		}else{
-			try {
-				int x=dimensiones.getX();
-				int y=dimensiones.getY();
-				this.dimensiones=dimensiones;
-				for (int i = 0; i < x; i++) {
-					for (int j = 0; j < y; j++) {
-							celdas.put(new Coordenada(i,j), EstadoCelda.MUERTA);
-					}
-				}
-			}catch(ExcepcionCoordenadaIncorrecta coord) {
-				throw new ExcepcionEjecucion(coord);
-			}
+		}else {
+			this.dimensiones=dimensiones;
 		}
 	}
 
 	public Coordenada getDimensiones() {
-		try {
-			return new Coordenada(dimensiones.getX(), dimensiones.getY());
-		}catch (ExcepcionCoordenadaIncorrecta coordenada) {
-			throw new ExcepcionEjecucion(coordenada);
-		}
+		return dimensiones;
 	}
 
-	public String toString() {
+	public abstract String toString(); /*{
 		StringBuilder sb = new StringBuilder();
 		int cx=dimensiones.getX();
 		int cy=dimensiones.getY();
@@ -67,13 +52,13 @@ public class Tablero {
 		}
 		sb.append("+\n");
 		return sb.toString();
-	}
+	}*/
 
 	public Collection<Coordenada> getPosiciones(){
 			return celdas.keySet();
 	}
 
-	private void muestraErrorPosicionInvalida(Coordenada c) {
+/*	private void muestraErrorPosicionInvalida(Coordenada c) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Error: La celda (");
 		sb.append(c.getX());
@@ -81,7 +66,7 @@ public class Tablero {
 		sb.append(c.getY());
 		sb.append(") no existe");
 		System.err.println(sb);
-	}
+	}*/
 
 	public EstadoCelda getCelda(Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
 		if(posicion==null) {
@@ -90,21 +75,22 @@ public class Tablero {
 		Set<Coordenada> coordenadas = celdas.keySet();
 		if(coordenadas.contains(posicion)==false) {
 			//muestraErrorPosicionInvalida(posicion);
-			throw new ExcepcionPosicionFueraTablero(dimensiones, posicion); //donde tengamos el mensaje MuestraError...
+			throw new ExcepcionPosicionFueraTablero(dimensiones, posicion);
 			//return null;
 		}else {
 			return celdas.get(posicion);
 		}
 	}
 
-	public void setCelda(Coordenada posicion, EstadoCelda e) {
+	public void setCelda(Coordenada posicion, EstadoCelda e) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
 		 if(posicion==null || e==null){
 		 	throw new ExcepcionArgumentosIncorrectos();
 		 }
 		if(celdas.containsKey(posicion)) {
 			celdas.put(posicion, e);
 		}else {
-			muestraErrorPosicionInvalida(posicion);
+			//muestraErrorPosicionInvalida(posicion);
+			throw new ExcepcionPosicionFueraTablero(dimensiones, posicion);
 		}
 	}
 
@@ -117,16 +103,16 @@ public class Tablero {
 		if(celdas.containsKey(posicion)==false) {
 			throw new ExcepcionPosicionFueraTablero(dimensiones, posicion);
 		}
-		int i=posicion.getX();
-		int j=posicion.getY();
+		int i=((Coordenada2D)posicion).getX();
+		int j=((Coordenada2D)posicion).getY();
 		if(celdas.containsKey(posicion)) {
 			Coordenada coordenada;
 			//vecina0
 			try {
-				coordenada = new Coordenada (i - 1, j - 1);
+				coordenada = new Coordenada2D (i - 1, j - 1);
 				if(celdas.get(coordenada)!=null) {
 					try {
-						vecinas.add(new Coordenada(i - 1, j - 1));
+						vecinas.add(new Coordenada2D(i - 1, j - 1));
 					}catch(ExcepcionCoordenadaIncorrecta error) {
 						throw new ExcepcionEjecucion(error);
 					}
@@ -136,10 +122,10 @@ public class Tablero {
 			}
 			//vecina1
 			try {
-				coordenada = new Coordenada (i - 1, j);
+				coordenada = new Coordenada2D(i - 1, j);
 				if(celdas.get(coordenada)!=null) {
 					try {
-						vecinas.add(new Coordenada(i - 1, j));
+						vecinas.add(new Coordenada2D(i - 1, j));
 					}catch(ExcepcionCoordenadaIncorrecta error) {
 						throw new ExcepcionEjecucion(error);
 					}
@@ -149,10 +135,10 @@ public class Tablero {
 			}
 			//vecina2
 			try {
-				coordenada = new Coordenada (i - 1, j + 1);
+				coordenada = new Coordenada2D(i - 1, j + 1);
 				if(celdas.get(coordenada)!=null) {
 					try {
-						vecinas.add(new Coordenada(i - 1, j + 1));
+						vecinas.add(new Coordenada2D(i - 1, j + 1));
 					}catch(ExcepcionCoordenadaIncorrecta error) {
 						throw new ExcepcionEjecucion(error);
 					}
@@ -162,10 +148,10 @@ public class Tablero {
 			}
 			//vecina3
 			try {
-				coordenada = new Coordenada (i, j + 1);
+				coordenada = new Coordenada2D(i, j + 1);
 				if(celdas.get(coordenada)!=null) {
 					try {
-						vecinas.add(new Coordenada(i , j + 1));
+						vecinas.add(new Coordenada2D(i , j + 1));
 					}catch(ExcepcionCoordenadaIncorrecta error) {
 						throw new ExcepcionEjecucion(error);
 					}
@@ -175,10 +161,10 @@ public class Tablero {
 			}
 			//vecina4
 			try {
-				coordenada = new Coordenada (i + 1, j + 1);
+				coordenada = new Coordenada2D(i + 1, j + 1);
 				if(celdas.get(coordenada)!=null) {
 					try {
-						vecinas.add(new Coordenada(i + 1, j + 1));
+						vecinas.add(new Coordenada2D(i + 1, j + 1));
 					}catch(ExcepcionCoordenadaIncorrecta error) {
 						throw new ExcepcionEjecucion(error);
 					}
@@ -188,10 +174,10 @@ public class Tablero {
 			}
 			//vecina5
 			try {
-				coordenada = new Coordenada (i + 1, j);
+				coordenada = new Coordenada2D(i + 1, j);
 				if(celdas.get(coordenada)!=null) {
 					try {
-						vecinas.add(new Coordenada(i + 1, j));
+						vecinas.add(new Coordenada2D(i + 1, j));
 					}catch(ExcepcionCoordenadaIncorrecta error) {
 						throw new ExcepcionEjecucion(error);
 					}
@@ -201,10 +187,10 @@ public class Tablero {
 			}
 			//vecina6
 			try {
-				coordenada = new Coordenada (i + 1, j - 1);
+				coordenada = new Coordenada2D(i + 1, j - 1);
 				if(celdas.get(coordenada)!=null) {
 					try {
-						vecinas.add(new Coordenada(i + 1, j - 1));
+						vecinas.add(new Coordenada2D(i + 1, j - 1));
 					}catch(ExcepcionCoordenadaIncorrecta error) {
 						throw new ExcepcionEjecucion(error);
 					}
@@ -214,10 +200,10 @@ public class Tablero {
 			}
 			//vecina7
 			try {
-				coordenada = new Coordenada (i, j - 1);
+				coordenada = new Coordenada2D(i, j - 1);
 				if(celdas.get(coordenada)!=null) {
 					try {
-						vecinas.add(new Coordenada(i, j - 1));
+						vecinas.add(new Coordenada2D(i, j - 1));
 					}catch(ExcepcionCoordenadaIncorrecta error) {
 						throw new ExcepcionEjecucion(error);
 					}
@@ -229,7 +215,7 @@ public class Tablero {
 		return vecinas;
 	}
 
-	public boolean cargaPatron(Patron patron, Coordenada coordenadaInicial) throws ExcepcionArgumentosIncorrectos, ExcepcionCoordenadaIncorrecta {
+	public void cargaPatron(Patron patron, Coordenada coordenadaInicial)throws ExcepcionEjecucion, ExcepcionPosicionFueraTablero{
 		boolean p_charge = true;
 		Coordenada c_final = null;
 		Collection<Coordenada> coordenada;
@@ -237,7 +223,11 @@ public class Tablero {
 			coordenada = patron.getPosiciones();
 			if(coordenada!=null) {
 				for(Coordenada select:coordenada) {
-					c_final=select.suma(coordenadaInicial);
+					try {
+						c_final=select.suma(coordenadaInicial);
+					}catch(ExcepcionCoordenadaIncorrecta error) {
+						throw new ExcepcionEjecucion(error);
+					}
 					if(celdas.containsKey(c_final) == false){
 						p_charge=false;
 					}
@@ -245,20 +235,31 @@ public class Tablero {
 			
 				EstadoCelda c_status;
 				if(p_charge==true) {
-					coordenada = patron.getPosiciones();
+				coordenada = patron.getPosiciones();
 					for(Coordenada select:coordenada) {
-						c_final=select.suma(coordenadaInicial);
+						try {
+							c_final=select.suma(coordenadaInicial);
+						}catch(ExcepcionCoordenadaIncorrecta error) {
+							throw new ExcepcionEjecucion(error);
+						}
+						try {
 						c_status=patron.getCelda(select);
 						celdas.put(c_final,c_status);
+						}catch(ExcepcionCoordenadaIncorrecta error) {
+							throw new ExcepcionPosicionFueraTablero(error);
+						}
 					}
-				}else {
-					muestraErrorPosicionInvalida(c_final);
 				}
+				//else {
+					//muestraErrorPosicionInvalida(c_final);
+					//throw new ExcepcionPosicionFueraTablero(dimensiones, select);
+				//}
 			}
 		}else {
-			p_charge=false;
+			throw new ExcepcionArgumentosIncorrectos();
+			//p_charge=false;
 		}
-		return p_charge;
+		//return p_charge;
 	}
 
 	public boolean contiene(Coordenada posicion) {
