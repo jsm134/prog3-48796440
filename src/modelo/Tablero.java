@@ -215,7 +215,7 @@ public abstract class Tablero {
 		return vecinas;
 	}
 
-	public void cargaPatron(Patron patron, Coordenada coordenadaInicial)throws ExcepcionEjecucion, ExcepcionPosicionFueraTablero{
+	public void cargaPatron(Patron patron, Coordenada coordenadaInicial)throws ExcepcionEjecucion{
 		boolean p_charge = true;
 		Coordenada c_final = null;
 		Collection<Coordenada> coordenada;
@@ -245,8 +245,8 @@ public abstract class Tablero {
 						try {
 						c_status=patron.getCelda(select);
 						celdas.put(c_final,c_status);
-						}catch(ExcepcionCoordenadaIncorrecta error) {
-							throw new ExcepcionPosicionFueraTablero(error);
+						}catch(ExcepcionPosicionFueraTablero error) {
+							throw new ExcepcionEjecucion(error);
 						}
 					}
 				}
