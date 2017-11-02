@@ -22,7 +22,7 @@ public class Juego {
 	}
 
 	public void cargaPatron(Patron p, Coordenada posicionInicial) {
-		tablero.cargaPatron(p, posicionInicial));
+		tablero.cargaPatron(p, posicionInicial);
 			patronesUsados.add(p);
 			StringBuilder sb = new StringBuilder();
 			sb.append("Error cargando plantilla ");
