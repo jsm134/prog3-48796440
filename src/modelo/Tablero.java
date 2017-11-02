@@ -243,17 +243,17 @@ public abstract class Tablero {
 							throw new ExcepcionEjecucion(error);
 						}
 						try {
-						c_status=patron.getCelda(select);
-						celdas.put(c_final,c_status);
+							c_status=patron.getCelda(select);
+							celdas.put(c_final,c_status);
 						}catch(ExcepcionPosicionFueraTablero error) {
 							throw new ExcepcionEjecucion(error);
 						}
 					}
 				}
-				//else {
-					//muestraErrorPosicionInvalida(c_final);
-					//throw new ExcepcionPosicionFueraTablero(dimensiones, select);
-				//}
+				/*else {
+					muestraErrorPosicionInvalida(c_final);
+					throw new ExcepcionPosicionFueraTablero(dimensiones, select);
+				}*/
 			}
 		}else {
 			throw new ExcepcionArgumentosIncorrectos();
