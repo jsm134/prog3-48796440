@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import modelo.excepciones.ExcepcionArgumentosIncorrectos;
+import modelo.excepciones.ExcepcionEjecucion;
 import modelo.excepciones.ExcepcionPosicionFueraTablero;
 
 public class Juego {
@@ -21,18 +22,18 @@ public class Juego {
 		patronesUsados=new ArrayList<Patron>();
 	}
 
-	public void cargaPatron(Patron p, Coordenada posicionInicial) {
+	public void cargaPatron(Patron p, Coordenada posicionInicial) throws ExcepcionEjecucion, ExcepcionPosicionFueraTablero {
 		tablero.cargaPatron(p, posicionInicial);
-			patronesUsados.add(p);
-			StringBuilder sb = new StringBuilder();
-			sb.append("Error cargando plantilla ");
-			sb.append(p.getNombre());
-			sb.append(" en (");
-			sb.append(((Coordenada2D)posicionInicial).getX());
-			sb.append(",");
-			sb.append(((Coordenada2D)posicionInicial).getY());
-			sb.append(")");
-			System.err.println(sb);
+		patronesUsados.add(p);
+		/*StringBuilder sb = new StringBuilder();
+		sb.append("Error cargando plantilla ");
+		sb.append(p.getNombre());
+		sb.append(" en (");
+		sb.append(((Coordenada2D)posicionInicial).getX());
+		sb.append(",");
+		sb.append(((Coordenada2D)posicionInicial).getY());
+		sb.append(")");
+		System.err.println(sb);*/
 	}
 
 	public void actualiza() throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero {
