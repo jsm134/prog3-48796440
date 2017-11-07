@@ -94,7 +94,7 @@ public abstract class Tablero {
 		}
 	}
 
-	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
+	public abstract ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero;/*{
 		ArrayList<Coordenada> vecinas = new ArrayList<Coordenada>();
 		
 		if(posicion == null) {
@@ -213,7 +213,7 @@ public abstract class Tablero {
 			}
 		}
 		return vecinas;
-	}
+	}*/
 
 	public void cargaPatron(Patron patron, Coordenada coordenadaInicial)throws ExcepcionEjecucion{
 		boolean p_charge = true;

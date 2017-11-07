@@ -30,7 +30,7 @@ public class Tablero1D extends Tablero {
 				if(i - 1 >=0) {
 					vecinas.add(new Coordenada1D(i-1));
 				}
-				if(i+1 <= ((Coordenada1D)dimensiones).getX()){
+				if(i+1 < ((Coordenada1D)dimensiones).getX()){
 					vecinas.add(new Coordenada1D(i+1));
 				}
 			}catch(ExcepcionCoordenadaIncorrecta error) {
