@@ -52,6 +52,7 @@ public class Tablero1D extends Tablero {
 				}
 			}
 			sb.append("|");
+			sb.append("\n");
 			return sb.toString();
 		}catch(ExcepcionCoordenadaIncorrecta error) {
 			throw new ExcepcionEjecucion(error);

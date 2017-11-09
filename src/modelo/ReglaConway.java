@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import modelo.excepciones.ExcepcionArgumentosIncorrectos;
 import modelo.excepciones.ExcepcionPosicionFueraTablero;
 
-public class ReglaConway {
+public class ReglaConway extends Regla{
 
 	public ReglaConway() {}
 

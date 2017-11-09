@@ -10,13 +10,13 @@ import modelo.excepciones.ExcepcionPosicionFueraTablero;
 
 public class Juego {
 
-	private ReglaConway regla;
+	private Regla regla;
 
 	private ArrayList<Patron> patronesUsados;
 
 	private Tablero tablero;
 
-	public Juego(Tablero tablero, ReglaConway regla) throws ExcepcionArgumentosIncorrectos {
+	public Juego(Tablero tablero, Regla regla) throws ExcepcionArgumentosIncorrectos {
 		if(tablero != null && regla != null) {
 			this.tablero=tablero;
 			this.regla=regla;

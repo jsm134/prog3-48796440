@@ -13,7 +13,7 @@ public abstract class Tablero {
 
 	protected HashMap<Coordenada,EstadoCelda> celdas;
 
-	public Tablero(Coordenada dimensiones)throws ExcepcionArgumentosIncorrectos, ExcepcionEjecucion{
+	protected Tablero(Coordenada dimensiones)throws ExcepcionArgumentosIncorrectos, ExcepcionEjecucion{
 		//celdas=new HashMap<Coordenada, EstadoCelda>();
 		if(dimensiones==null) {
 			throw new ExcepcionArgumentosIncorrectos();
