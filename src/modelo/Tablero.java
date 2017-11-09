@@ -7,12 +7,24 @@ import java.util.Set;
 
 import modelo.excepciones.*;
 
+/**
+ * La Clase Tablero.
+ */
 public abstract class Tablero {
 
+	/** Las dimensiones. */
 	protected Coordenada dimensiones;
 
+	/** Las celdas. */
 	protected HashMap<Coordenada,EstadoCelda> celdas;
 
+	/**
+	 * Inicializa un nuevo tablero.
+	 *
+	 * @param dimensiones las dimensiones
+	 * @throws ExcepcionArgumentosIncorrectos la excepcion argumentos incorrectos
+	 * @throws ExcepcionEjecucion la excepcion ejecucion
+	 */
 	protected Tablero(Coordenada dimensiones)throws ExcepcionArgumentosIncorrectos, ExcepcionEjecucion{
 		//celdas=new HashMap<Coordenada, EstadoCelda>();
 		if(dimensiones==null) {
@@ -22,10 +34,16 @@ public abstract class Tablero {
 		}
 	}
 
+	/**
+	 * Getter de dimensiones.
+	 *
+	 * @return las dimensiones
+	 */
 	public Coordenada getDimensiones() {
 		return dimensiones;
 	}
 
+	@Override
 	public abstract String toString(); /*{
 		StringBuilder sb = new StringBuilder();
 		int cx=dimensiones.getX();
@@ -54,34 +72,55 @@ public abstract class Tablero {
 		return sb.toString();
 	}*/
 
-	public Collection<Coordenada> getPosiciones(){
-			return celdas.keySet();
-	}
-
-/*	private void muestraErrorPosicionInvalida(Coordenada c) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Error: La celda (");
-		sb.append(c.getX());
-		sb.append(",");
-		sb.append(c.getY());
-		sb.append(") no existe");
-		System.err.println(sb);
-	}*/
-
+	/**
+	* Getter de posiciones.
+	*
+	* @return las posiciones
+	*/
+	 public Collection<Coordenada> getPosiciones(){
+				return celdas.keySet();
+		}
+	
+	/*	private void muestraErrorPosicionInvalida(Coordenada c) {
+			StringBuilder sb = new StringBuilder();
+			sb.append("Error: La celda (");
+			sb.append(c.getX());
+			sb.append(",");
+			sb.append(c.getY());
+			sb.append(") no existe");
+			System.err.println(sb);
+		}*/
+	
+		/**
+	 * Getter de celda.
+	 *
+	 * @param posicion la posicion
+	 * @return la celda
+	 * @throws ExcepcionArgumentosIncorrectos la excepcion argumentos incorrectos
+	 * @throws ExcepcionPosicionFueraTablero la excepcion posicion fuera tablero
+	 */
 	public EstadoCelda getCelda(Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
-		if(posicion==null) {
-			throw new ExcepcionArgumentosIncorrectos();
+			if(posicion==null) {
+				throw new ExcepcionArgumentosIncorrectos();
+			}
+			Set<Coordenada> coordenadas = celdas.keySet();
+			if(coordenadas.contains(posicion)==false) {
+				//muestraErrorPosicionInvalida(posicion);
+				throw new ExcepcionPosicionFueraTablero(dimensiones, posicion);
+				//return null;
+			}else {
+				return celdas.get(posicion);
+			}
 		}
-		Set<Coordenada> coordenadas = celdas.keySet();
-		if(coordenadas.contains(posicion)==false) {
-			//muestraErrorPosicionInvalida(posicion);
-			throw new ExcepcionPosicionFueraTablero(dimensiones, posicion);
-			//return null;
-		}else {
-			return celdas.get(posicion);
-		}
-	}
 
+	/**
+	 * Setter de celda.
+	 *
+	 * @param posicion la posicion
+	 * @param e la e
+	 * @throws ExcepcionArgumentosIncorrectos la excepcion argumentos incorrectos
+	 * @throws ExcepcionPosicionFueraTablero la excepcion posicion fuera tablero
+	 */
 	public void setCelda(Coordenada posicion, EstadoCelda e) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
 		 if(posicion==null || e==null){
 		 	throw new ExcepcionArgumentosIncorrectos();
@@ -94,6 +133,14 @@ public abstract class Tablero {
 		}
 	}
 
+	/**
+	 * Getter de posiciones vecinas CCW.
+	 *
+	 * @param posicion la posicion
+	 * @return las posiciones vecinas CCW
+	 * @throws ExcepcionArgumentosIncorrectos la excepcion argumentos incorrectos
+	 * @throws ExcepcionPosicionFueraTablero la excepcion posicion fuera tablero
+	 */
 	public abstract ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero;/*{
 		ArrayList<Coordenada> vecinas = new ArrayList<Coordenada>();
 		
@@ -215,6 +262,13 @@ public abstract class Tablero {
 		return vecinas;
 	}*/
 
+	/**
+	 * Carga patron.
+	 *
+	 * @param patron el patron
+	 * @param coordenadaInicial la coordenada inicial
+	 * @throws ExcepcionEjecucion la excepcion ejecucion
+	 */
 	public void cargaPatron(Patron patron, Coordenada coordenadaInicial)throws ExcepcionEjecucion{
 		boolean p_charge = true;
 		Coordenada c_final = null;
@@ -262,6 +316,12 @@ public abstract class Tablero {
 		//return p_charge;
 	}
 
+	/**
+	 * Booleano Contiene.
+	 *
+	 * @param posicion la posicion
+	 * @return true, si contiene la posicion
+	 */
 	public boolean contiene(Coordenada posicion) {
 		return celdas.containsKey(posicion);
 	}
