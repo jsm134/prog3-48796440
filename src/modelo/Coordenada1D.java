@@ -3,14 +3,14 @@ import modelo.excepciones.*;
 
 public class Coordenada1D extends Coordenada {
 	private int x;
-	private static int NUMERO_COORDENADAS;
+	//private static int NUMERO_COORDENADAS;
 
 	public Coordenada1D(int x) throws ExcepcionCoordenadaIncorrecta{
 		if(x<0) {
 			throw new ExcepcionCoordenadaIncorrecta();
 		}else {
 			this.x=x;
-			NUMERO_COORDENADAS++;
+			//NUMERO_COORDENADAS++;
 		}
 	}
 
@@ -19,7 +19,7 @@ public class Coordenada1D extends Coordenada {
 			throw new ExcepcionArgumentosIncorrectos();
 		}else{
 			this.x=otra.x;
-			NUMERO_COORDENADAS++;
+			//NUMERO_COORDENADAS++;
 		}
 	}
 	
@@ -46,9 +46,9 @@ public class Coordenada1D extends Coordenada {
 		return true;
 	}
 
-	public static int getNumeroCoordenadas() {
+	/*public static int getNumeroCoordenadas() {
 		return NUMERO_COORDENADAS;
-	}
+	}*/
 	@Override
 	public String toString() {
 		return "(" + this.x + ")";
