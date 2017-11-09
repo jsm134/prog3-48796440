@@ -6,11 +6,11 @@ import java.util.HashMap;
 import modelo.excepciones.*;
 
 public class Tablero1D extends Tablero {
-	public Tablero1D(int cx) throws ExcepcionCoordenadaIncorrecta, ExcepcionArgumentosIncorrectos{
-		super(new Coordenada1D(cx));
+	public Tablero1D(int ancho) throws ExcepcionCoordenadaIncorrecta, ExcepcionArgumentosIncorrectos{
+		super(new Coordenada1D(ancho));
 		celdas=new HashMap<Coordenada, EstadoCelda>();
 			try {
-				for (int i = 0; i < cx; i++) {
+				for (int i = 0; i < ancho; i++) {
 					celdas.put(new Coordenada1D(i), EstadoCelda.MUERTA);
 				}
 			}catch(ExcepcionCoordenada1DIncorrecta error) {

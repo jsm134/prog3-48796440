@@ -5,8 +5,8 @@ import java.util.HashMap;
 import modelo.excepciones.*;
 
 public abstract class Tablero2D extends Tablero{
-	public Tablero2D(int cx, int cy) throws ExcepcionArgumentosIncorrectos, ExcepcionCoordenadaIncorrecta{
-		super(new Coordenada2D(cx, cy));
+	public Tablero2D(int ancho, int alto) throws ExcepcionArgumentosIncorrectos, ExcepcionCoordenadaIncorrecta{
+		super(new Coordenada2D(ancho, alto));
 		celdas=new HashMap<Coordenada, EstadoCelda>();
 		try {
 			int x=((Coordenada2D)dimensiones).getX();
