@@ -1,13 +1,31 @@
+/**
+ * @author Jose Soler Martinez	48796440P
+ */
 package modelo;
 
 import java.util.ArrayList;
 import modelo.excepciones.*;
 
+/**
+ * Clase TableroCeldasCuadradas
+ * Clase extendida de Tablero2D que permite la creacion de un tablero de dos dimension,
+ * mostrarlo y calcular sus posiciones vecinas a partir de una celda
+ */
 public class TableroCeldasCuadradas extends Tablero2D{
+	
+	/**
+	 * Instantiates a new tablero celdas cuadradas.
+	 *
+	 * @param x la variable x de la coordenada
+	 * @param y la variable y de la coordenada
+	 * @throws ExcepcionArgumentosIncorrectos lanza una excepcion de argumentos incorrectos
+	 * @throws ExcepcionCoordenadaIncorrecta lanza una excepcion de coordenada incorrecta
+	 */
 	public TableroCeldasCuadradas(int x, int y) throws ExcepcionArgumentosIncorrectos, ExcepcionCoordenadaIncorrecta{
 		super(x,y);
 	}
 	
+	@Override
 	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionPosicionFueraTablero, ExcepcionArgumentosIncorrectos, ExcepcionEjecucion{
 		ArrayList<Coordenada> vecinas = new ArrayList<Coordenada>();
 		

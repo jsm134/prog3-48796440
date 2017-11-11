@@ -1,9 +1,16 @@
+/**
+ * @author Jose Soler Martinez 48796440P
+ */
 package modelo;
 
 import java.util.HashMap;
 
 import modelo.excepciones.*;
-
+/**
+ *	Clase Tablero2D
+ *	Clase extendida de Tablero que permite la creacion de un tablero
+ *	de dos dimensiones
+ */
 public abstract class Tablero2D extends Tablero{
 	
 	/**
@@ -11,8 +18,8 @@ public abstract class Tablero2D extends Tablero{
 	 *
 	 * @param ancho el ancho de la celda
 	 * @param alto el alto de la celda
-	 * @throws ExcepcionArgumentosIncorrectos la excepcion argumentos incorrectos
-	 * @throws ExcepcionCoordenadaIncorrecta la excepcion coordenada incorrecta
+	 * @throws ExcepcionArgumentosIncorrectos lanza una excepcion de argumentos incorrectos
+	 * @throws ExcepcionCoordenadaIncorrecta lanza una excepcion de coordenada incorrecta
 	 */
 	public Tablero2D(int ancho, int alto) throws ExcepcionArgumentosIncorrectos, ExcepcionCoordenadaIncorrecta{
 		super(new Coordenada2D(ancho, alto));
@@ -25,7 +32,7 @@ public abstract class Tablero2D extends Tablero{
 						celdas.put(new Coordenada2D(i,j), EstadoCelda.MUERTA);
 				}
 			}
-		}catch(ExcepcionCoordenadaIncorrecta coord) {
+		}catch(ExcepcionCoordenada2DIncorrecta coord) {
 			throw new ExcepcionEjecucion(coord);
 		}
 	}

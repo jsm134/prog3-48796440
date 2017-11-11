@@ -1,32 +1,53 @@
+/**
+ * @author Jose Soler Martinez
+ */
 package modelo;
 import modelo.excepciones.*;
 
+/**
+ * La clase Coordenada2D.
+ * Crea una Coordenada de una dimension comprobando que se encuentre dentro de las directrices
+ * Tambien se suman coordenadas de una dimension, proviene de la clase coordenada.
+ */
 public class Coordenada2D extends Coordenada {
+	
+	/** Parametro x de la coordenada. */
 	private int x;
+	
+	/** Parametro y de la coordenada. */
 	private int y;
-	//private static int NUMERO_COORDENADAS;
 
+	/**
+	 * Constructor de una coordenada2D.
+	 *
+	 * @param x parametro x de la coordenada
+	 * @param y parametro y de la coordenada
+	 * @throws ExcepcionCoordenadaIncorrecta lanza una excepcion de coordenada incorrecta en el caso de que los parametros no sean correctos
+	 */
 	public Coordenada2D(int x, int y) throws ExcepcionCoordenadaIncorrecta{
 		if(x<0 || y<0) {
-			throw new ExcepcionCoordenadaIncorrecta();
+			throw new ExcepcionCoordenada2DIncorrecta(x,y);
 		}else {
 			this.x=x;
 			this.y=y;
-			//NUMERO_COORDENADAS++;
 		}
 	}
 
+	/**
+	 * Constructor de una coordenada2D.
+	 *
+	 * @param otra variable pasada como parametro que se usa para crear la variable
+	 * @throws ExcepcionArgumentosIncorrectos lanza una excepcion de argumentos incorrectos
+	 */
 	public Coordenada2D (Coordenada2D otra) throws ExcepcionArgumentosIncorrectos {
 		if(otra == null) {
 			throw new ExcepcionArgumentosIncorrectos();
 		}else{
 			this.x=otra.x;
 			this.y=otra.y;
-			//NUMERO_COORDENADAS++;
 		}
 	}
 	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -51,23 +72,31 @@ public class Coordenada2D extends Coordenada {
 			return false;
 		return true;
 	}
-
-	/*public static int getNumeroCoordenadas() {
-		return NUMERO_COORDENADAS;
-	}*/
+	
 	@Override
 	public String toString() {
 		return "(" + this.x + "," + this.y + ")";
 	}
 
+	/**
+	 * Getter del parametro x.
+	 *
+	 * @return la coordenada x
+	 */
 	public int getX() {
 		return x;
 	}
 
+	/**
+	 * Getter del parametro y.
+	 *
+	 * @return la coordenada y
+	 */
 	public int getY() {
 		return y;
 	}
 
+	@Override
 	public Coordenada2D suma (Coordenada otra) throws ExcepcionCoordenadaIncorrecta, ExcepcionArgumentosIncorrectos {
 		if(otra==null) {
 			throw new ExcepcionArgumentosIncorrectos();

@@ -1,3 +1,6 @@
+/**
+ * @author Jose Soler Martinez 48796440P
+ */
 package modelo;
 
 import java.util.ArrayList;
@@ -8,14 +11,29 @@ import modelo.excepciones.ExcepcionArgumentosIncorrectos;
 import modelo.excepciones.ExcepcionEjecucion;
 import modelo.excepciones.ExcepcionPosicionFueraTablero;
 
+/**
+ * La clase Juego.
+ * Permite la creacion de un nuevo juego, la carga de patrones y la actualizacion
+ * de cada uno de los movimientos de las celdas
+ */
 public class Juego {
 
+	/** Parametro regla. */
 	private Regla regla;
 
+	/** Vector de los patrones usados. */
 	private ArrayList<Patron> patronesUsados;
-
+	
+	/** Variable que guarda el tablero. */
 	private Tablero tablero;
 
+	/**
+	 * Constructor de un nuevo juego.
+	 *
+	 * @param tablero parametro pasado por referencia tablero
+	 * @param regla parametro pasado por referencia regla
+	 * @throws ExcepcionArgumentosIncorrectos lanza una excepcion de argumentos incorrectos
+	 */
 	public Juego(Tablero tablero, Regla regla) throws ExcepcionArgumentosIncorrectos {
 		if(tablero != null && regla != null) {
 			this.tablero=tablero;
@@ -26,20 +44,24 @@ public class Juego {
 		}
 	}
 
+	/**
+	 * Modulo que permite la carga de un patron.
+	 *
+	 * @param p variable p de la clase patron
+	 * @param posicionInicial variable que hace referencia a la posicion inicial del patron
+	 * @throws ExcepcionEjecucion lanza una excepcion de ejecucion
+	 * @throws ExcepcionPosicionFueraTablero lanza una excepcion de posicion fuera tablero
+	 */
 	public void cargaPatron(Patron p, Coordenada posicionInicial) throws ExcepcionEjecucion, ExcepcionPosicionFueraTablero {
 		tablero.cargaPatron(p, posicionInicial);
 		patronesUsados.add(p);
-		/*StringBuilder sb = new StringBuilder();
-		sb.append("Error cargando plantilla ");
-		sb.append(p.getNombre());
-		sb.append(" en (");
-		sb.append(((Coordenada2D)posicionInicial).getX());
-		sb.append(",");
-		sb.append(((Coordenada2D)posicionInicial).getY());
-		sb.append(")");
-		System.err.println(sb);*/
 	}
 
+	/**
+	 * Modulo que actualiza el patron.
+	 *
+	 * @throws ExcepcionEjecucion lanza una excepcion de ejecucion
+	 */
 	public void actualiza() throws ExcepcionEjecucion {
 		HashMap<Coordenada, EstadoCelda> celdas = new HashMap<Coordenada, EstadoCelda>();
 		Collection<Coordenada> coordenada;
@@ -60,10 +82,20 @@ public class Juego {
 		}
 	}
 
+	/**
+	 * Getter de tablero.
+	 *
+	 * @return el tablero
+	 */
 	public Tablero getTablero() {
 		return tablero;
 	}
 
+	/**
+	 * getter de patrones.
+	 *
+	 * @return los patrones usados
+	 */
 	public ArrayList<Patron> getPatrones(){
 		return patronesUsados;
 	}

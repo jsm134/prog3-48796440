@@ -1,13 +1,27 @@
+/**
+ * @author Jose Soler Martinez 48796440P
+ */
 package modelo;
  
 import java.util.ArrayList;
 
 import modelo.excepciones.*;
 
+/**
+ * La clase Regla30 permite calcular el estado siguiente de cada una de
+ * las celdas del tablero mediante un algoritmo previamente implementado
+ * basado en 111 110 101 000.
+ */
 public class Regla30 extends Regla {
+	
+	/**
+	 * Constructor de Regla30.
+	 */
 	public Regla30() {
 		
 	}
+	
+	@Override
 	public EstadoCelda calculaSiguienteEstadoCelda(Tablero tablero, Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
 		if(tablero == null || posicion == null) {
 			throw new ExcepcionArgumentosIncorrectos();

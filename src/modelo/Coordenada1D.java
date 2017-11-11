@@ -1,29 +1,49 @@
+/*
+ * @author Jose Soler Martinez 48796440P
+ */
 package modelo;
 import modelo.excepciones.*;
 
+/**
+ * La clase Coordenada1D
+ * Crea una Coordenada de una dimension comprobando que se encuentre dentro de las directrices
+ * Tambien se suman coordenadas de una dimension, proviene de la clase coordenada.
+ */
 public class Coordenada1D extends Coordenada {
+	
+	/** 
+	 * Parametro x de la Coordenada. 
+	 */
 	private int x;
-	//private static int NUMERO_COORDENADAS;
 
+	/**
+	 * Inicializa una nueva coordenada1D.
+	 *
+	 * @param x parametro que incluye la seccion de la coordenada x
+	 * @throws ExcepcionCoordenadaIncorrecta lanza una excepcion de coordenada incorrecta
+	 */
 	public Coordenada1D(int x) throws ExcepcionCoordenadaIncorrecta{
 		if(x<0) {
-			throw new ExcepcionCoordenadaIncorrecta();
+			throw new ExcepcionCoordenada1DIncorrecta(x);
 		}else {
 			this.x=x;
-			//NUMERO_COORDENADAS++;
 		}
 	}
 
+	/**
+	 * Constructor de Coordenada1D a traves de un parametro.
+	 *
+	 * @param otra parametro pasado por referencia (coordenada x) llamado otra
+	 * @throws ExcepcionArgumentosIncorrectos lanza una excepcion argumentos incorrectos
+	 */
 	public Coordenada1D (Coordenada1D otra) throws ExcepcionArgumentosIncorrectos {
 		if(otra == null) {
 			throw new ExcepcionArgumentosIncorrectos();
 		}else{
 			this.x=otra.x;
-			//NUMERO_COORDENADAS++;
 		}
 	}
 	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -46,18 +66,21 @@ public class Coordenada1D extends Coordenada {
 		return true;
 	}
 
-	/*public static int getNumeroCoordenadas() {
-		return NUMERO_COORDENADAS;
-	}*/
 	@Override
 	public String toString() {
 		return "(" + this.x + ")";
 	}
 
+	/**
+	 * Getter del la coordenada x.
+	 *
+	 * @return la coordenada x
+	 */
 	public int getX() {
 		return x;
 	}
-
+	
+	@Override
 	public Coordenada1D suma (Coordenada otra) throws ExcepcionCoordenadaIncorrecta, ExcepcionArgumentosIncorrectos {
 		if(otra==null) {
 			throw new ExcepcionArgumentosIncorrectos();

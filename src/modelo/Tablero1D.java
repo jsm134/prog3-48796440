@@ -1,3 +1,7 @@
+/*
+ * @author Jose Soler Martinez 48796440P
+ * 
+ */
 package modelo;
 
 import java.util.ArrayList;
@@ -5,7 +9,20 @@ import java.util.HashMap;
 
 import modelo.excepciones.*;
 
+/**
+ * La Clase Tablero1D.
+ * Clase extendida de Tablero que permite la creacion de un tablero de una unica dimension,
+ * mostrarlo y calcular sus posiciones vecinas a partir de una celda
+ */
 public class Tablero1D extends Tablero {
+	
+	/**
+	 * Constructor de Tablero1D
+	 *
+	 * @param ancho el ancho de las celdas
+	 * @throws ExcepcionCoordenadaIncorrecta lanza una excepcion de coordenada incorrecta
+	 * @throws ExcepcionArgumentosIncorrectos lanza una excepcion de argumentos incorrectos
+	 */
 	public Tablero1D(int ancho) throws ExcepcionCoordenadaIncorrecta, ExcepcionArgumentosIncorrectos{
 		super(new Coordenada1D(ancho));
 		celdas=new HashMap<Coordenada, EstadoCelda>();
@@ -17,6 +34,8 @@ public class Tablero1D extends Tablero {
 				throw new ExcepcionEjecucion(error);
 			}
 	}
+	
+	@Override
 	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
 		ArrayList<Coordenada> vecinas = new ArrayList<Coordenada>();
 		
@@ -39,6 +58,8 @@ public class Tablero1D extends Tablero {
 		}
 		return vecinas;
 	}
+	
+	@Override
 	public String toString() {
 		try {
 			int cx=((Coordenada1D)dimensiones).getX();
