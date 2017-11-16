@@ -47,8 +47,8 @@ public abstract class Tablero {
 		return dimensiones;
 	}
 
-	@Override
-	public abstract String toString();
+	//@Override
+	//public abstract String toString();
 
 	/**
 	 * Getter de posiciones.
@@ -132,7 +132,7 @@ public abstract class Tablero {
 					}
 					if(celdas.containsKey(c_final) == false){
 						p_charge=false;
-						//throw new ExcepcionPosicionFueraTablero(dimensiones, c_final);
+						throw new ExcepcionPosicionFueraTablero(dimensiones, c_final);
 					}
 				}
 			
@@ -154,7 +154,7 @@ public abstract class Tablero {
 					}
 				}else{
 					//muestraErrorPosicionInvalida(c_final);
-					throw new ExcepcionPosicionFueraTablero(dimensiones, c_final);
+					//throw new ExcepcionPosicionFueraTablero(dimensiones, c_final);
 				}
 			}
 		}else {
