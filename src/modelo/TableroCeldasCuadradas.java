@@ -11,7 +11,7 @@ import modelo.excepciones.*;
  * Clase extendida de Tablero2D que permite la creacion de un tablero de dos dimension,
  * mostrarlo y calcular sus posiciones vecinas a partir de una celda
  */
-public class TableroCeldasCuadradas extends Tablero2D{
+public class TableroCeldasCuadradas extends Tablero2D implements Imprimible{
 	
 	/**
 	 * Instantiates a new tablero celdas cuadradas.
@@ -178,5 +178,8 @@ public class TableroCeldasCuadradas extends Tablero2D{
 		}catch(ExcepcionCoordenadaIncorrecta e) {
 			throw new ExcepcionEjecucion(e);
 		}
+	}
+	public String generaCadena() {
+		return toString();
 	}
 }

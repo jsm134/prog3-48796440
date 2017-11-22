@@ -14,7 +14,7 @@ import modelo.excepciones.*;
  * Clase extendida de Tablero que permite la creacion de un tablero de una unica dimension,
  * mostrarlo y calcular sus posiciones vecinas a partir de una celda
  */
-public class Tablero1D extends Tablero {
+public class Tablero1D extends Tablero implements Imprimible {
 	
 	/**
 	 * Constructor de Tablero1D
@@ -78,6 +78,11 @@ public class Tablero1D extends Tablero {
 			throw new ExcepcionEjecucion(error);
 		}
 	}
+	
+	public String generaCadena() {
+		return toString();
+	}
+	
 }
 
 
