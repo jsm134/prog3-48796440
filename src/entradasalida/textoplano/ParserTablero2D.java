@@ -36,7 +36,7 @@ public class ParserTablero2D {
 					}
 				}
 				for(int i = 0; i < n_lineas; i++) {
-					if(cadenaIncorrecta(cadena)) {
+					if(cadenaIncorrecta(lineas[i])) {
 						throw new ExcepcionLectura();
 					}
 				}

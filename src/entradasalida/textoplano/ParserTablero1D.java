@@ -28,27 +28,27 @@ public class ParserTablero1D implements IParserTablero{
 			if(cadena.equals("")) {
 				throw new ExcepcionLectura();
 			}
-			try {
-				if(cadenaIncorrecta(cadena)){
-					throw new ExcepcionLectura();
-				}else {
+			if(cadenaIncorrecta(cadena)){
+				throw new ExcepcionLectura();
+			}else {
+				try {
 					int largo = cadena.length();
 					tablero = new Tablero1D(largo);
 					for(int i=0; i < largo;i++) {
 						if(cadena.charAt(i) == ' ') {
-							tablero.setCelda(new Coordenada1D(i), EstadoCelda.VIVA);
+							tablero.setCelda(new Coordenada1D(i), EstadoCelda.MUERTA);
 						}else {
 							tablero.setCelda(new Coordenada1D(i), EstadoCelda.VIVA);
 						}
 					}
-				}
 				
-			}catch(Exception error) {
-				throw new ExcepcionEjecucion(error);
+				}catch(Exception error) {
+					throw new ExcepcionEjecucion(error);
+				}
 			}
 		}else {
 			throw new ExcepcionArgumentosIncorrectos();
 		}
-		return null;
+		return tablero;
 	}
 }

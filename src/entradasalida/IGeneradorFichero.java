@@ -9,9 +9,9 @@ import modelo.Imprimible;
 import modelo.Juego;
 import modelo.excepciones.ExcepcionArgumentosIncorrectos;
 
-public class IGeneradorFichero {
-	public void generaFichero(File file, Juego juego, int iteracciones) throws ExcepcionArgumentosIncorrectos, ExcepcionGeneracion{
-		if(juego.getTablero() instanceof Imprimible) {
+public interface IGeneradorFichero {
+	public static void generaFichero(File file, Juego juego, int iteracciones) throws ExcepcionArgumentosIncorrectos, ExcepcionGeneracion{
+		/*if(juego.getTablero() instanceof Imprimible) {
 			if(file == null || juego == null) {
 				throw new ExcepcionArgumentosIncorrectos();
 			}
@@ -32,6 +32,6 @@ public class IGeneradorFichero {
 			}
 		}else {
 			throw new ExcepcionGeneracion("Error: no pertenece a Imprimible");
-		}
+		}*/
 	}
 }
