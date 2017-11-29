@@ -23,7 +23,7 @@ public class GeneradorGIFTablero1D implements IGeneradorFichero{
 		}
 	}
 	
-	public GeneradorGIFTablero1D() {
+	public GeneradorGIFTablero1D(){
 		
 	}
 	public void generaFichero(File file, Juego juego, int iteracciones) throws ExcepcionGeneracion {
