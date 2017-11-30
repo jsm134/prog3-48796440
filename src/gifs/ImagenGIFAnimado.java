@@ -37,7 +37,7 @@ public class ImagenGIFAnimado {
 		} catch (InterruptedException e) {
 			throw new ExcepcionGeneracion(e);
 		}
-	}
+	} 
 	/**
 	 * Guarda el GIF animado
 	 * @param file Fichero donde guardar

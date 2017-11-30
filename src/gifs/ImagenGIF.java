@@ -77,7 +77,7 @@ public class ImagenGIF {
 		} catch (IOException e) {
 			throw new ExcepcionGeneracion(e);
 		}
-	}
+	} 
 	
 	/**
 	 * Visibilidad paquete para ser usada por ImagenGIFAnimado

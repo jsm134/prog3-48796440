@@ -10,7 +10,5 @@ import modelo.Juego;
 import modelo.excepciones.ExcepcionArgumentosIncorrectos;
 
 public interface IGeneradorFichero {
-	public static void generaFichero(File file, Juego juego, int iteracciones) throws ExcepcionArgumentosIncorrectos, ExcepcionGeneracion{
-		
-	}
+	public abstract void generaFichero(File file, Juego juego, int iteracciones) throws ExcepcionGeneracion;
 }

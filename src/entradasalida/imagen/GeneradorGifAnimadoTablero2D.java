@@ -13,7 +13,7 @@ import modelo.Juego;
 import modelo.excepciones.ExcepcionArgumentosIncorrectos;
 import modelo.excepciones.ExcepcionEjecucion;
 
-public class GeneradorGifTablero2D implements IGeneradorFichero {
+public class GeneradorGifAnimadoTablero2D implements IGeneradorFichero {
 	private void posiblesErrores(File file, Juego juego, int iteracciones) throws ExcepcionGeneracion {
 		if(file == null || juego == null) {
 			throw new ExcepcionArgumentosIncorrectos();
@@ -23,7 +23,7 @@ public class GeneradorGifTablero2D implements IGeneradorFichero {
 			throw new ExcepcionGeneracion("No pertenece a imprimible");
 		}
 	}
-	public GeneradorGifTablero2D() {
+	public GeneradorGifAnimadoTablero2D() {
 		
 	}
 	public void generaFichero(File file, Juego juego, int iteracciones) throws ExcepcionGeneracion{
