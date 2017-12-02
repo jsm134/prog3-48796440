@@ -11,7 +11,9 @@ import modelo.EstadoCelda;
 import modelo.Imprimible;
 import modelo.Juego;
 import modelo.excepciones.ExcepcionArgumentosIncorrectos;
+import modelo.excepciones.ExcepcionCoordenadaIncorrecta;
 import modelo.excepciones.ExcepcionEjecucion;
+import modelo.excepciones.ExcepcionPosicionFueraTablero;
 
 public class GeneradorGifAnimadoTablero2D implements IGeneradorFichero {
 	private void posiblesErrores(File file, Juego juego, int iteracciones) throws ExcepcionGeneracion {
@@ -31,25 +33,28 @@ public class GeneradorGifAnimadoTablero2D implements IGeneradorFichero {
 		ImagenGIFAnimado gifa = new ImagenGIFAnimado(100);
 		ImagenGIF gif;
 		int x = ((Coordenada2D)juego.getTablero().getDimensiones()).getX();
-		int y = ((Coordenada2D)juego.getTablero().getDimensiones()).getY();
-		try {
-			Coordenada2D coordenada = new Coordenada2D(x,y);
-			EstadoCelda estaviva = juego.getTablero().getCelda(coordenada);
-			for(int i = 0; i < iteracciones; i++) {
-				gif = new ImagenGIF(x,y);
-				for(int j = 0; j < x; j++) {
-					for(int z = 0; z < y; z++) {
+		int y = ((Coordenada2D)juego.getTablero().getDimensiones()).getY();	
+		for(int i = 0; i < iteracciones; i++) {
+			gif = new ImagenGIF(x,y);
+			for(int j = 0; j < x; j++) {
+				for(int z = 0; z < y; z++) {
+					try {
+						Coordenada2D coordenada = new Coordenada2D(j,z);
+						EstadoCelda estaviva = juego.getTablero().getCelda(coordenada);
 						if(estaviva == EstadoCelda.VIVA) {
 							gif.pintaCuadrado(j, z);
 						}
+					}catch(ExcepcionCoordenadaIncorrecta error) {
+						throw new ExcepcionEjecucion(error);
+					} catch (ExcepcionPosicionFueraTablero error) {
+						throw new ExcepcionEjecucion(error);
 					}
-				}
-				juego.actualiza();
-				gifa.addFotograma(gif);
+				}			
 			}
-			gifa.guardaFichero(file);
-		}catch(Exception error) {
-			throw new ExcepcionEjecucion(error);
+			gifa.addFotograma(gif);
+			juego.actualiza();
 		}
+		gifa.guardaFichero(file);
+	
 	}
 }

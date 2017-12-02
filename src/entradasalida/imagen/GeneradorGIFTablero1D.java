@@ -9,7 +9,9 @@ import modelo.EstadoCelda;
 import modelo.Imprimible;
 import modelo.Juego;
 import modelo.excepciones.ExcepcionArgumentosIncorrectos;
+import modelo.excepciones.ExcepcionCoordenadaIncorrecta;
 import modelo.excepciones.ExcepcionEjecucion;
+import modelo.excepciones.ExcepcionPosicionFueraTablero;
 import entradasalida.IGeneradorFichero;
 
 public class GeneradorGIFTablero1D implements IGeneradorFichero{
@@ -28,21 +30,23 @@ public class GeneradorGIFTablero1D implements IGeneradorFichero{
 	}
 	public void generaFichero(File file, Juego juego, int iteracciones) throws ExcepcionGeneracion {
 		posiblesErrores(file, juego, iteracciones);
-		try {
 			Coordenada1D coordenada = (Coordenada1D)juego.getTablero().getDimensiones();
 			int ancho = coordenada.getX();
 			ImagenGIF gif = new ImagenGIF(ancho, iteracciones);
 			for(int j = 0; j < iteracciones; j++) {
 				for(int i = 0; i < ancho; i++){
+					try {
 					if(juego.getTablero().getCelda(new Coordenada1D(i)) == EstadoCelda.VIVA){
 						gif.pintaCuadrado(i, j);
+					}
+					}catch(ExcepcionCoordenadaIncorrecta error) {
+						throw new ExcepcionEjecucion(error);
+					}catch(ExcepcionPosicionFueraTablero error) {
+						throw new ExcepcionEjecucion(error);
 					}
 				}
 				juego.actualiza();
 			}
 			gif.guardaFichero(file);
-		}catch(Exception error) {
-			throw new ExcepcionEjecucion(error);
-		}
 	}
 }
