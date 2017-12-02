@@ -55,6 +55,5 @@ public class GeneradorGifAnimadoTablero2D implements IGeneradorFichero {
 			juego.actualiza();
 		}
 		gifa.guardaFichero(file);
-	
 	}
 }
