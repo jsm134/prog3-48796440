@@ -30,23 +30,23 @@ public class GeneradorGIFTablero1D implements IGeneradorFichero{
 	}
 	public void generaFichero(File file, Juego juego, int iteracciones) throws ExcepcionGeneracion {
 		posiblesErrores(file, juego, iteracciones);
-			Coordenada1D coordenada = (Coordenada1D)juego.getTablero().getDimensiones();
-			int ancho = coordenada.getX();
-			ImagenGIF gif = new ImagenGIF(ancho, iteracciones);
-			for(int j = 0; j < iteracciones; j++) {
-				for(int i = 0; i < ancho; i++){
-					try {
-					if(juego.getTablero().getCelda(new Coordenada1D(i)) == EstadoCelda.VIVA){
-						gif.pintaCuadrado(i, j);
-					}
-					}catch(ExcepcionCoordenadaIncorrecta error) {
-						throw new ExcepcionEjecucion(error);
-					}catch(ExcepcionPosicionFueraTablero error) {
-						throw new ExcepcionEjecucion(error);
-					}
+		Coordenada1D coordenada = (Coordenada1D)juego.getTablero().getDimensiones();
+		int ancho = coordenada.getX();
+		ImagenGIF gif = new ImagenGIF(ancho, iteracciones);
+		for(int j = 0; j < iteracciones; j++) {
+			for(int i = 0; i < ancho; i++){
+				try {
+				if(juego.getTablero().getCelda(new Coordenada1D(i)) == EstadoCelda.VIVA){
+					gif.pintaCuadrado(i, j);
 				}
-				juego.actualiza();
+				}catch(ExcepcionCoordenadaIncorrecta error) {
+					throw new ExcepcionEjecucion(error);
+				}catch(ExcepcionPosicionFueraTablero error) {
+					throw new ExcepcionEjecucion(error);
+				}
 			}
-			gif.guardaFichero(file);
+			juego.actualiza();
+		}
+		gif.guardaFichero(file);
 	}
 }
