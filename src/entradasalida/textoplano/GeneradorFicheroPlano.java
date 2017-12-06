@@ -11,10 +11,19 @@ import modelo.Juego;
 import modelo.Tablero;
 import modelo.excepciones.ExcepcionArgumentosIncorrectos;
 
+/**
+ * La clase GeneradorFicheroPlano.
+ */
 public class GeneradorFicheroPlano implements IGeneradorFichero {
+	
+	/**
+	 * Constructor de un generador de fichero plano.
+	 */
 	public GeneradorFicheroPlano() {
 		
 	}
+	
+	@Override
 	public void generaFichero(File file, Juego juego, int iteracciones) throws ExcepcionGeneracion {
 			if(file == null || juego == null) {
 				throw new ExcepcionArgumentosIncorrectos();

@@ -18,15 +18,37 @@ import modelo.excepciones.ExcepcionArgumentosIncorrectos;
 import modelo.excepciones.ExcepcionCoordenadaIncorrecta;
 import modelo.excepciones.ExcepcionEjecucion;
 
+/**
+ * La Clase Factory.
+ */
 public class Factory {
+	
+	/**
+	 * Instantiates a new factory.
+	 */
 	public Factory() {
 		
 	}
+	
+	/**
+	 * Tableronull.
+	 * Comprueba si el tablero pasado por parámetro es nulo y lanza una excepcion
+	 * @param tablero el tablero a evaluar
+	 */
 	private static void tableronull(Tablero tablero) {
 		if(tablero==null) {
 			throw new ExcepcionArgumentosIncorrectos();
 		}
 	}
+	
+	/**
+	 * Crea generador fichero.
+	 *
+	 * @param tablero el parametro tablero pasados por referencia
+	 * @param extension el parametr extension pasado por variable
+	 * @return el gif
+	 * @throws ExcepcionGeneracion lanza una excepcion generacion
+	 */
 	public static IGeneradorFichero creaGeneradorFichero(Tablero tablero, String extension) throws ExcepcionGeneracion {
 		IGeneradorFichero gif;
 		tableronull(tablero);
@@ -49,6 +71,12 @@ public class Factory {
 		return gif;
 	}
 	
+	/**
+	 * Crea regla.
+	 *
+	 * @param tablero el parametro tablero
+	 * @return la regla a utilizar
+	 */
 	public static Regla creaRegla(Tablero tablero) {
 		Regla regla;
 		tableronull(tablero);
@@ -62,6 +90,13 @@ public class Factory {
 		return regla;
 	}
 	
+	/**
+	 * Crea tablero.
+	 *
+	 * @param dimensiones parametro dimensiones pasado por referencia 
+	 * @return el tablero creado
+	 * @throws ExcepcionCoordenadaIncorrecta lanza una excepcion coordenada incorrecta
+	 */
 	public static Tablero creaTablero(Coordenada dimensiones) throws ExcepcionCoordenadaIncorrecta {
 		if(dimensiones == null) {
 			throw new ExcepcionArgumentosIncorrectos();

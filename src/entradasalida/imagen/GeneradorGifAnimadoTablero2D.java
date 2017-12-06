@@ -15,7 +15,19 @@ import modelo.excepciones.ExcepcionCoordenadaIncorrecta;
 import modelo.excepciones.ExcepcionEjecucion;
 import modelo.excepciones.ExcepcionPosicionFueraTablero;
 
+/**
+ * La clase GeneradorGifAnimadoTablero2D.
+ */
 public class GeneradorGifAnimadoTablero2D implements IGeneradorFichero {
+	
+	/**
+	 * Posibles errores.
+	 * Comprueba los posibles errores que se pueden dar
+	 * @param file parametro file pasado por parametro
+	 * @param juego el parametro juego pasado por parametro
+	 * @param iteracciones el parametro iteracciones pasado por parametro
+	 * @throws ExcepcionGeneracion lanza una excepcion generacion
+	 */
 	private void posiblesErrores(File file, Juego juego, int iteracciones) throws ExcepcionGeneracion {
 		if(file == null || juego == null) {
 			throw new ExcepcionArgumentosIncorrectos();
@@ -25,9 +37,15 @@ public class GeneradorGifAnimadoTablero2D implements IGeneradorFichero {
 			throw new ExcepcionGeneracion("No pertenece a imprimible");
 		}
 	}
+	
+	/**
+	 * Constructor de un gif animado a partir de un tablero 2D.
+	 */
 	public GeneradorGifAnimadoTablero2D() {
 		
 	}
+
+	@Override
 	public void generaFichero(File file, Juego juego, int iteracciones) throws ExcepcionGeneracion{
 		posiblesErrores(file, juego, iteracciones);
 		ImagenGIFAnimado gifa = new ImagenGIFAnimado(100);

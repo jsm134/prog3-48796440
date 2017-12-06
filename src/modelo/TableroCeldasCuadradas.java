@@ -179,6 +179,8 @@ public class TableroCeldasCuadradas extends Tablero2D implements Imprimible{
 			throw new ExcepcionEjecucion(e);
 		}
 	}
+	
+	@Override
 	public String generaCadena() {
 		return toString();
 	}

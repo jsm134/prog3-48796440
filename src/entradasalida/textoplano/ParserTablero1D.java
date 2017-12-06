@@ -10,8 +10,17 @@ import entradasalida.excepciones.*;
 
 
 
+/**
+ * La clase ParserTablero1D.
+ */
 public class ParserTablero1D implements IParserTablero{
 	
+	/**
+	 * Cadena incorrecta.
+	 * Comprueba si la cadena pasada por parametro es correcta o no
+	 * @param cadena parametro cadena pasado por parametro
+	 * @return true, si tiene caracteres invalidos
+	 */
 	private boolean cadenaIncorrecta(String cadena) {
 		boolean comprobado = false;
 		for(int i=0;i < cadena.length(); i++) {
@@ -22,6 +31,7 @@ public class ParserTablero1D implements IParserTablero{
 		return comprobado;
 	}
 	
+	@Override
 	public Tablero leeTablero(String cadena) throws ExcepcionLectura{
 		Tablero tablero;
 		if(cadena != null) {

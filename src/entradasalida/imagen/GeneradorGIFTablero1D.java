@@ -14,7 +14,19 @@ import modelo.excepciones.ExcepcionEjecucion;
 import modelo.excepciones.ExcepcionPosicionFueraTablero;
 import entradasalida.IGeneradorFichero;
 
+/**
+ * La clase GeneradorGIFTablero1D.
+ */
 public class GeneradorGIFTablero1D implements IGeneradorFichero{
+	
+	/**
+	 * Posibles errores.
+	 * Comprueba los posibles errores que se especifican en la practica
+	 * @param file el parametro file pasado por referencia
+	 * @param juego el parametro juego pasado por referencia
+	 * @param iteracciones el parametro iteracciones pasado por referencia
+	 * @throws ExcepcionGeneracion lanza una excepcion generacion
+	 */
 	private void posiblesErrores(File file, Juego juego, int iteracciones) throws ExcepcionGeneracion {
 		if(file == null || juego == null) {
 			throw new ExcepcionArgumentosIncorrectos();
@@ -25,9 +37,14 @@ public class GeneradorGIFTablero1D implements IGeneradorFichero{
 		}
 	}
 	
+	/**
+	 * Constructor del generador GIF de un talbero tablero 1D.
+	 */
 	public GeneradorGIFTablero1D(){
 		
 	}
+	
+	@Override
 	public void generaFichero(File file, Juego juego, int iteracciones) throws ExcepcionGeneracion {
 		posiblesErrores(file, juego, iteracciones);
 		Coordenada1D coordenada = (Coordenada1D)juego.getTablero().getDimensiones();

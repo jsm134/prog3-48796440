@@ -17,7 +17,7 @@ import modelo.excepciones.*;
 public class Tablero1D extends Tablero implements Imprimible {
 	
 	/**
-	 * Constructor de Tablero1D
+	 * Constructor de Tablero1D.
 	 *
 	 * @param ancho el ancho de las celdas
 	 * @throws ExcepcionCoordenadaIncorrecta lanza una excepcion de coordenada incorrecta
@@ -35,6 +35,9 @@ public class Tablero1D extends Tablero implements Imprimible {
 			}
 	}
 	
+	/* (non-Javadoc)
+	 * @see modelo.Tablero#getPosicionesVecinasCCW(modelo.Coordenada)
+	 */
 	@Override
 	public ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
 		ArrayList<Coordenada> vecinas = new ArrayList<Coordenada>();
@@ -59,6 +62,9 @@ public class Tablero1D extends Tablero implements Imprimible {
 		return vecinas;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		try {
@@ -79,6 +85,7 @@ public class Tablero1D extends Tablero implements Imprimible {
 		}
 	}
 	
+	@Override
 	public String generaCadena() {
 		return toString();
 	}

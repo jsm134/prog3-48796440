@@ -4,10 +4,25 @@ import modelo.Tablero;
 import modelo.excepciones.*;
 import entradasalida.textoplano.*;
 
+/**
+ * La Clase ParserTableros.
+ */
 public class ParserTableros {
+	
+	/**
+	 * Constructor de ParserTableros
+	 */
 	public ParserTableros() {
 		
 	}
+	
+	/**
+	 * Lee tablero.
+	 *
+	 * @param cadena parametro cadena cadena pasado por referencia
+	 * @return devuelve el tablero sobre el cual vamos a trabajar
+	 * @throws ExcepcionLectura lanza una excepcion lectura
+	 */
 	public static Tablero leeTablero(String cadena) throws ExcepcionLectura{
 		Tablero principal;
 		

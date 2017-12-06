@@ -10,8 +10,17 @@ import modelo.excepciones.ExcepcionCoordenadaIncorrecta;
 import modelo.excepciones.ExcepcionEjecucion;
 import modelo.excepciones.ExcepcionPosicionFueraTablero;
 
+/**
+ * La clase ParserTablero2D.
+ */
 public class ParserTablero2D {
 
+	/**
+	 * Cadena incorrecta.
+	 * Comprueba si la cadena pasada por parametro es correcta o no
+	 * @param cadena parametro cadena pasado por parametro
+	 * @return true, si tiene caracteres invalidos
+	 */
 	private boolean cadenaIncorrecta(String cadena) {
 		boolean comprobado = false;
 		for(int i=0;i < cadena.length(); i++) {
@@ -22,6 +31,13 @@ public class ParserTablero2D {
 		return comprobado;
 	}
 	
+	/**
+	 * Lee tablero.
+	 *
+	 * @param cadena parametro cadena pasado por referencia
+	 * @return el tablero a evaluar
+	 * @throws ExcepcionLectura lanza una excepcion lectura
+	 */
 	public Tablero leeTablero(String cadena) throws ExcepcionLectura{
 		Tablero tablero;
 		if(cadena != null) {
