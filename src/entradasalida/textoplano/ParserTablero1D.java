@@ -1,3 +1,7 @@
+/*
+ * @author Jose Soler Martinez 48796440P
+ * 
+ */
 package entradasalida.textoplano;
 import entradasalida.IParserTablero;
 import modelo.Coordenada1D;
