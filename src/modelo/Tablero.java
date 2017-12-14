@@ -15,13 +15,13 @@ import modelo.excepciones.*;
  * Clase principal a partir de la cual se hacen modificaciones tanto en los
  * tableros de 1 dimension como los de 2
  */
-public abstract class Tablero {
+public abstract class Tablero<TipoCoordenada extends Coordenada> {
 
 	/** Las dimensiones. */
-	protected Coordenada dimensiones;
+	protected TipoCoordenada dimensiones;
 
 	/** Las celdas. */
-	protected HashMap<Coordenada,EstadoCelda> celdas;
+	protected HashMap<TipoCoordenada,EstadoCelda> celdas;
 
 	/**
 	 * Inicializa un nuevo tablero.
@@ -29,8 +29,8 @@ public abstract class Tablero {
 	 * @param dimensiones las dimensiones del tablero
 	 * @throws ExcepcionArgumentosIncorrectos lanza una excepcion de argumentos incorrectos
 	 */
-	protected Tablero(Coordenada dimensiones)throws ExcepcionArgumentosIncorrectos{
-		//celdas=new HashMap<Coordenada, EstadoCelda>();
+	protected Tablero(TipoCoordenada dimensiones)throws ExcepcionArgumentosIncorrectos{
+		//celdas=new HashMap<TipoCoordenada, EstadoCelda>();
 		if(dimensiones==null) {
 			throw new ExcepcionArgumentosIncorrectos();
 		}else {
@@ -43,7 +43,7 @@ public abstract class Tablero {
 	 *
 	 * @return las dimensiones del tablero
 	 */
-	public Coordenada getDimensiones() {
+	public TipoCoordenada getDimensiones() {
 		return dimensiones;
 	}
 
@@ -55,7 +55,7 @@ public abstract class Tablero {
 	 *
 	 * @return las posiciones de las celdas del tablero
 	 */
-	public Collection<Coordenada> getPosiciones(){
+	public Collection<TipoCoordenada> getPosiciones(){
 		return celdas.keySet();
 	}
 	
@@ -67,11 +67,11 @@ public abstract class Tablero {
 	 * @throws ExcepcionArgumentosIncorrectos lanza una excepcion de argumentos incorrectos
 	 * @throws ExcepcionPosicionFueraTablero lanza una excepcion de posicion fuera tablero
 	 */
-	public EstadoCelda getCelda(Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
+	public EstadoCelda getCelda(TipoCoordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
 			if(posicion==null) {
 				throw new ExcepcionArgumentosIncorrectos();
 			}
-			Set<Coordenada> coordenadas = celdas.keySet();
+			Set<TipoCoordenada> coordenadas = celdas.keySet();
 			if(coordenadas.contains(posicion)==false) {
 				throw new ExcepcionPosicionFueraTablero(dimensiones, posicion);
 			}else {
@@ -82,12 +82,12 @@ public abstract class Tablero {
 	/**
 	 * Setter de celda.
 	 *
-	 * @param posicion la posicion de la coordenada
+	 * @param posicion la posicion de la TipoCoordenada
 	 * @param e el estado de la celda pasado por parametro
 	 * @throws ExcepcionArgumentosIncorrectos lanza una excepcion de argumentos incorrectos
 	 * @throws ExcepcionPosicionFueraTablero lanza una excepcion de posicion fuera tablero
 	 */
-	public void setCelda(Coordenada posicion, EstadoCelda e) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
+	public void setCelda(TipoCoordenada posicion, EstadoCelda e) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero{
 		 if(posicion==null || e==null){
 		 	throw new ExcepcionArgumentosIncorrectos();
 		 }
@@ -106,27 +106,27 @@ public abstract class Tablero {
 	 * @throws ExcepcionArgumentosIncorrectos lanza una excepcion de argumentos incorrectos
 	 * @throws ExcepcionPosicionFueraTablero lanza una excepcion de posicion fuera tablero
 	 */
-	public abstract ArrayList<Coordenada> getPosicionesVecinasCCW(Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero;
+	public abstract ArrayList<TipoCoordenada> getPosicionesVecinasCCW(TipoCoordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero;
 
 	/**
 	 * Carga patron, carga un patron a utilizar.
 	 *
 	 * @param patron el patron a seguir
-	 * @param coordenadaInicial la coordenada inicial a partir de la cual se genera el partron
+	 * @param coordenadaInicial la TipoCoordenada inicial a partir de la cual se genera el partron
 	 * @throws ExcepcionEjecucion lanza una excepcion de ejecucion
 	 * @throws ExcepcionPosicionFueraTablero lanza una excepcion fuera del tablero
 	 * @throws ExcepcionArgumentosIncorrectos lanza una excepcion de argumentos incorrectos
 	 */
-	public void cargaPatron(Patron patron, Coordenada coordenadaInicial)throws ExcepcionEjecucion, ExcepcionPosicionFueraTablero, ExcepcionArgumentosIncorrectos{
+	public void cargaPatron(Patron patron, TipoCoordenada coordenadaInicial)throws ExcepcionEjecucion, ExcepcionPosicionFueraTablero, ExcepcionArgumentosIncorrectos{
 		boolean p_charge = true;
-		Coordenada c_final = null;
-		Collection<Coordenada> coordenada;
+		TipoCoordenada c_final = null;
+		Collection<TipoCoordenada> TipoCoordenada;
 		if(patron != null && coordenadaInicial != null) {
-			coordenada = patron.getPosiciones();
-			if(coordenada!=null) {
-				for(Coordenada select:coordenada) {
+			TipoCoordenada = patron.getPosiciones();
+			if(TipoCoordenada!=null) {
+				for(TipoCoordenada select:TipoCoordenada) {
 					try {
-						c_final=select.suma(coordenadaInicial);
+						c_final=(TipoCoordenada)select.suma(coordenadaInicial);
 					}catch(ExcepcionCoordenadaIncorrecta error) {
 						throw new ExcepcionEjecucion(error);
 					}
@@ -138,10 +138,10 @@ public abstract class Tablero {
 			
 				EstadoCelda c_status;
 				if(p_charge) {
-				coordenada = patron.getPosiciones();
-					for(Coordenada select:coordenada) {
+				TipoCoordenada = patron.getPosiciones();
+					for(TipoCoordenada select:TipoCoordenada) {
 						try {
-							c_final=select.suma(coordenadaInicial);
+							c_final=(TipoCoordenada)select.suma(coordenadaInicial);
 						}catch(ExcepcionCoordenadaIncorrecta error) {
 							throw new ExcepcionEjecucion(error);
 						}
@@ -170,7 +170,7 @@ public abstract class Tablero {
 	 * @param posicion la posicion de la celda en el tablero
 	 * @return true, si contiene la posicion
 	 */
-	public boolean contiene(Coordenada posicion) {
+	public boolean contiene(TipoCoordenada posicion) {
 		if(posicion != null) {
 			return celdas.containsKey(posicion);
 		}else {

@@ -5,19 +5,19 @@
 package entradasalida;
 
 import entradasalida.excepciones.ExcepcionGeneracion;
-import entradasalida.imagen.GeneradorGIFTablero1D;
-import entradasalida.imagen.GeneradorGifAnimadoTablero2D;
-import entradasalida.textoplano.GeneradorFicheroPlano;
+import entradasalida.gif.GeneradorTableroCoordenada1D;
+import entradasalida.gif.GeneradorTableroCoordenada2D;
+import entradasalida.txt.GeneradorFicheroPlano;
 import modelo.Coordenada;
-import modelo.Coordenada1D;
-import modelo.Coordenada2D;
 import modelo.Regla;
-import modelo.Regla30;
-import modelo.ReglaConway;
 import modelo.Tablero;
-import modelo.Tablero1D;
-import modelo.Tablero2D;
-import modelo.TableroCeldasCuadradas;
+import modelo.d1.Coordenada1D;
+import modelo.d1.Regla30;
+import modelo.d1.Tablero1D;
+import modelo.d2.Coordenada2D;
+import modelo.d2.ReglaConway;
+import modelo.d2.Tablero2D;
+import modelo.d2.TableroCeldasCuadradas;
 import modelo.excepciones.ExcepcionArgumentosIncorrectos;
 import modelo.excepciones.ExcepcionCoordenadaIncorrecta;
 import modelo.excepciones.ExcepcionEjecucion;
@@ -59,18 +59,18 @@ public class Factory {
 		if(extension==null) {
 			throw new ExcepcionArgumentosIncorrectos();
 		}
-		if(extension.equals("txt")) {
-			gif = new GeneradorFicheroPlano();
-		}else if(extension.equals("gif")) {
-			if(tablero instanceof Tablero1D) {
-				gif = new GeneradorGIFTablero1D();
-			}else if(tablero instanceof Tablero2D) {
-				gif = new GeneradorGifAnimadoTablero2D();
-			}else {
-				throw new ExcepcionEjecucion("No es un tablero valido");
+		String nombre_fichero = "entradasalida." + extension + ".GeneradorTablero" + tablero.getDimensiones().getClass().getSimpleName();
+		try {
+			Class clase = Class.forName(nombre_fichero);
+			try {
+				gif = (IGeneradorFichero)clase.newInstance();
+			} catch (InstantiationException error) {
+				throw new ExcepcionGeneracion(error);
+			} catch (IllegalAccessException error) {
+				throw new ExcepcionGeneracion(error);
 			}
-		}else {
-			throw new ExcepcionGeneracion("No tiene una extension valida");
+		}catch(ClassNotFoundException error) {
+			throw new ExcepcionGeneracion("nombre_fichero incorrecto");
 		}
 		return gif;
 	}

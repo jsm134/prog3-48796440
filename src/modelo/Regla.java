@@ -10,7 +10,7 @@ import modelo.excepciones.*;
  * Sirve para administrar y como base de regla30 y ReglaConway
  * mediante las cuales se aplican las reglas establecidas.
  */
-public abstract class Regla {
+public abstract class Regla<TipoCoordenada extends Coordenada> {
 	
 	/**
 	 * Constructor de regla.
@@ -28,5 +28,5 @@ public abstract class Regla {
 	 * @throws ExcepcionArgumentosIncorrectos lanza una excepcion de argumentos incorrectos
 	 * @throws ExcepcionPosicionFueraTablero lanza una excepcion de posicion fuera tablero
 	 */
-	public abstract EstadoCelda calculaSiguienteEstadoCelda(Tablero tablero,Coordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero;
+	public abstract EstadoCelda calculaSiguienteEstadoCelda(Tablero<TipoCoordenada> tablero,TipoCoordenada posicion) throws ExcepcionArgumentosIncorrectos, ExcepcionPosicionFueraTablero;
 }
