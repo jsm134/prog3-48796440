@@ -116,7 +116,7 @@ public abstract class Tablero<TipoCoordenada extends Coordenada> {
 	 * @throws ExcepcionPosicionFueraTablero lanza una excepcion fuera del tablero
 	 * @throws ExcepcionArgumentosIncorrectos lanza una excepcion de argumentos incorrectos
 	 */
-	public void cargaPatron(Patron patron, TipoCoordenada coordenadaInicial)throws ExcepcionEjecucion, ExcepcionPosicionFueraTablero, ExcepcionArgumentosIncorrectos{
+	public void cargaPatron(Patron<TipoCoordenada> patron, TipoCoordenada coordenadaInicial)throws ExcepcionEjecucion, ExcepcionPosicionFueraTablero, ExcepcionArgumentosIncorrectos{
 		boolean p_charge = true;
 		TipoCoordenada c_final = null;
 		Collection<TipoCoordenada> TipoCoordenada;
