@@ -4,6 +4,7 @@
  */
 package entradasalida.txt;
 
+import entradasalida.IParserTablero;
 import entradasalida.excepciones.ExcepcionLectura;
 import modelo.EstadoCelda;
 import modelo.Tablero;
@@ -17,7 +18,7 @@ import modelo.excepciones.ExcepcionPosicionFueraTablero;
 /**
  * La clase ParserTablero2D.
  */
-public class ParserTablero2D {
+public class ParserTablero2D implements IParserTablero {
 
 	/**
 	 * Cadena incorrecta.
