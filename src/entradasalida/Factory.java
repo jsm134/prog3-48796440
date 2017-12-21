@@ -70,7 +70,7 @@ public class Factory {
 				throw new ExcepcionGeneracion(error);
 			}
 		}catch(ClassNotFoundException error) {
-			throw new ExcepcionGeneracion("nombre_fichero incorrecto");
+			throw new ExcepcionGeneracion(nombre_fichero);
 		}
 		return gif;
 	}
