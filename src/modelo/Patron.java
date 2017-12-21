@@ -10,6 +10,8 @@ import modelo.excepciones.ExcepcionPosicionFueraTablero;
 
 /**
  * La clase Patron.
+ *
+ * @param <TipoCoordenada> tipo generico de la clase coordenada
  */
 public class Patron <TipoCoordenada extends Coordenada>{
 
@@ -71,6 +73,9 @@ public class Patron <TipoCoordenada extends Coordenada>{
 		return posiciones;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

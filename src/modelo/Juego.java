@@ -15,6 +15,8 @@ import modelo.excepciones.ExcepcionPosicionFueraTablero;
  * La clase Juego.
  * Permite la creacion de un nuevo juego, la carga de patrones y la actualizacion
  * de cada uno de los movimientos de las celdas
+ *
+ * @param <TipoCoordenada> tipo generico de la clase coordenada
  */
 public class Juego<TipoCoordenada extends Coordenada> {
 

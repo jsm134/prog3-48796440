@@ -9,6 +9,8 @@ import modelo.excepciones.*;
  * La clase regla
  * Sirve para administrar y como base de regla30 y ReglaConway
  * mediante las cuales se aplican las reglas establecidas.
+ *
+ * @param <TipoCoordenada> tipo generico de la clase coordenada
  */
 public abstract class Regla<TipoCoordenada extends Coordenada> {
 	

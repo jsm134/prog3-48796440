@@ -14,6 +14,8 @@ import modelo.excepciones.*;
  * La Clase Tablero.
  * Clase principal a partir de la cual se hacen modificaciones tanto en los
  * tableros de 1 dimension como los de 2
+ *
+ * @param <TipoCoordenada> tipo generico de la clase coordenada
  */
 public abstract class Tablero<TipoCoordenada extends Coordenada> {
 
@@ -46,9 +48,6 @@ public abstract class Tablero<TipoCoordenada extends Coordenada> {
 	public TipoCoordenada getDimensiones() {
 		return dimensiones;
 	}
-
-	//@Override
-	//public abstract String toString();
 
 	/**
 	 * Getter de posiciones.
@@ -152,16 +151,11 @@ public abstract class Tablero<TipoCoordenada extends Coordenada> {
 							throw new ExcepcionEjecucion(error);
 						}
 					}
-				}else{
-					//muestraErrorPosicionInvalida(c_final);
-					//throw new ExcepcionPosicionFueraTablero(dimensiones, c_final);
 				}
 			}
 		}else {
 			throw new ExcepcionArgumentosIncorrectos();
-			//p_charge=false;
 		}
-		//return p_charge;
 	}
 
 	/**
